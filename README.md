@@ -284,7 +284,7 @@ Se você quiser aprender mais sobre a API do _Mercado Livre_, veja a [documenta�
 
 ## Requisitos do projeto
 
-Aqui encontram-se os requisitos do projeto. Para acessar a descrição completa das demandas, veja o quadro _Kanban_ disponibilizado para o seu grupo na [aba Projects](https://github.com/tryber/sd-0x-block15-project-frontend-online-store/projects) do repositório.
+Aqui encontram-se os requisitos do projeto. Para acessar a descrição completa das demandas, veja o quadro _Kanban_ disponibilizado para o seu grupo na [aba Projects](https://github.com/tryber/sd-04-project-frontend-online-store-16/projects) do repositório.
 
 ⚠ **PULL REQUESTS COM ISSUES NO CODE CLIMATE NÃO SERÃO AVALIADAS, ATENTE-SE PARA RESOLVÊ-LAS ANTES DE FINALIZAR O DESENVOLVIMENTO!** ⚠
 
@@ -479,9 +479,9 @@ a variável `categories` deve contém o objeto JSON com as categorias obtidas at
 ### ANTES DE COMEÇAR A DESENVOLVER:
 
 1. Clone o repositório
-  * `git clone git@github.com:tryber/sd-0x-block15-project-frontend-online-store.git`.
+  * `git clone git@github.com:tryber/sd-04-project-frontend-online-store-16.git`.
   * Entre na pasta do repositório que você acabou de clonar:
-    * `cd sd-0x-block15-project-frontend-online-store`
+    * `cd sd-04-project-frontend-online-store-16`
 
 2. Instale as dependências e inicialize o projeto
   * Instale as dependências:
@@ -514,13 +514,13 @@ a variável `categories` deve contém o objeto JSON com as categorias obtidas at
   * Usando o exemplo anterior: `git push -u origin criar-campo-de-busca`
 
 6. Crie um novo `Pull Request` _(PR)_
-  * Vá até a página de _Pull Requests_ do [repositório no GitHub](https://github.com/tryber/sd-0x-block15-project-frontend-online-store/pulls)
+  * Vá até a página de _Pull Requests_ do [repositório no GitHub](https://github.com/tryber/sd-04-project-frontend-online-store-16/pulls)
   * Clique no botão verde _"New pull request"_
   * Clique na caixa de seleção _"Compare"_ e escolha a branch do grupo e a sua branch **com atenção**
   * Clique no botão verde _"Create pull request"_
   * Adicione uma descrição para o _Pull Request_ e clique no botão verde _"Create pull request"_
   * **Não se preocupe em preencher mais nada por enquanto!**
-  * Volte até a [página de _Pull Requests_ do repositório](https://github.com/tryber/sd-0x-block15-project-frontend-online-store/pulls) e confira que o seu _Pull Request_ está criado
+  * Volte até a [página de _Pull Requests_ do repositório](https://github.com/tryber/sd-04-project-frontend-online-store-16/pulls) e confira que o seu _Pull Request_ está criado
 
 7. Após finalizar as alterações do seu _Pull Request_:
   * Vá até a página **DO SEU** _Pull Request_, adicione a label de _"code-review"_ e marque as pessoas do seu grupo
@@ -554,7 +554,7 @@ Para **"entregar"** seu projeto, siga os passos a seguir:
 * Vá até a página **DO SEU** _Pull Request_, adicione a label de _"code-review"_ e marque seus colegas
   * No menu à direita, clique no _link_ **"Labels"** e escolha a _label_ **code-review**
   * No menu à direita, clique no _link_ **"Assignees"** e escolha **o seu usuário**
-  * No menu à direita, clique no _link_ **"Reviewers"** e digite `students`, selecione o time `tryber/students-sd-0x`
+  * No menu à direita, clique no _link_ **"Reviewers"** e digite `students`, selecione o time `tryber/students-sd-04`
 
 Se ainda houver alguma dúvida sobre como entregar seu projeto, [aqui tem um video explicativo](https://vimeo.com/362189205).
 
