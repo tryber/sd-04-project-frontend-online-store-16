@@ -33,6 +33,7 @@ class ProductList extends React.Component {
           onSearchTextChange={this.onSearchTextChange}
         />
         <div>
+          <Link to="/cart" data-testid="shopping-cart-button">Carrinho</Link>
           <h4 data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </h4>
