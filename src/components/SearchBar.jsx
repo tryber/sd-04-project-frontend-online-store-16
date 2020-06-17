@@ -5,7 +5,13 @@ class SearchBar extends React.Component {
     const { searchApi, searchText, onSearchTextChange } = this.props;
     return (
       <div>
-        <input type="text" name="search" size="50" value={searchText} onChange={onSearchTextChange} />
+        <input
+          type="text"
+          name="search"
+          size="50"
+          value={searchText}
+          onChange={onSearchTextChange}
+        />
         <button type="button" onClick={() => searchApi()}>Pesquisar</button>
       </div>
     );
