@@ -16,17 +16,20 @@ class ProductList extends React.Component {
   }
 
   onSelectedCategoryChange(category) {
-    this.setState(state => ({ ...state, selectedCategory: category }));
-    api.getProductsFromCategory(category.id).then(data => this.setState(state => ({ ...state, products: data.results })))
+    this.setState((state) => ({ ...state, selectedCategory: category }));
+    api.getProductsFromCategory(category.id)
+      .then((data) => this.setState((state) => ({ ...state, products: data.results })))
   }
 
   searchApi(searchInput) {
-    this.setState(state => ({ ...state, searchText: searchInput }));
+    this.setState((state) => ({ ...state, searchText: searchInput }));
 
     if (this.state.selectedCategory.id) {
-      api.getProductsFromCategoryAndQuery(this.state.selectedCategory.id, searchInput).then(data => this.setState(state => ({ ...state, products: data.results })))
+      api.getProductsFromCategoryAndQuery(this.state.selectedCategory.id, searchInput)
+        .then((data) => this.setState((state) => ({ ...state, products: data.results })));
     } else {
-      api.getProductsFromQuery(searchInput).then(data => this.setState(state => ({ ...state, products: data.results })));
+      api.getProductsFromQuery(searchInput)
+        .then((data) => this.setState((state) => ({ ...state, products: data.results })));
     }
   }
 
