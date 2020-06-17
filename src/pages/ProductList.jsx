@@ -1,7 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 // import * as api from '../services/api';
 import SearchBar from '../components/SearchBar';
-import { Link } from 'react-router-dom';
 
 class ProductList extends React.Component {
   constructor(props) {
@@ -11,7 +11,7 @@ class ProductList extends React.Component {
       // products: '',
     };
     this.onSearchTextChange = this.onSearchTextChange.bind(this);
-    this.searchApi = this.searchApi.bind(this);
+    // this.searchApi = this.searchApi.bind(this);
   }
 
   onSearchTextChange(event) {
