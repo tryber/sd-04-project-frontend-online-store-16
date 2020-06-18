@@ -8,7 +8,7 @@ import CategoriesList from '../components/CategoriesList';
 const ProductCard = (props) => {
   const { product } = props;
   return (
-    <div key={product.id} data-testid="product" className="card w-25">
+    <div data-testid="product" className="card w-25">
       <Link data-testid="product-detail-link" to={`/product/${product.id}`}>
         <img className="card-img-top" height={150} src={product.thumbnail} alt="" />
         <div className="card-header">
@@ -17,13 +17,42 @@ const ProductCard = (props) => {
       </Link>
       <div className="card-body row justify-content-center">
         <p className="card-text text-center">R$ {Number(product.price).toFixed(2)}</p>
-        <button data-test="product-add-to-cart" className="btn btn-primary">Adicionar ao carrinho</button>
+        <button
+          data-test="product-add-to-cart"
+          className="btn btn-primary"
+        >
+          Adicionar ao carrinho
+        </button>
       </div>
 
     </div>
 
   );
 };
+
+const List = (props) => {
+  const { products } = props;
+  return (
+    <div>
+      {products[0] === 'initial' && (
+        <h4 data-testid="home-initial-message">
+          Digite algum termo de pesquisa ou escolha uma categoria.
+        </h4>)}
+      {products[0] !== 'initial' && (
+        <div className="row align-items-center">
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+      )}
+      {!products.length && (
+        <h4>
+          Nenhum produto foi encontrado
+        </h4>
+      )}
+    </div>
+  )
+}
 
 class ProductList extends React.Component {
   constructor(props) {
@@ -37,14 +66,14 @@ class ProductList extends React.Component {
     this.searchApi = this.searchApi.bind(this);
   }
 
-  resetSelectedCategory() {
-    this.setState((state) => ({ ...state, selectedCategory: {} }));
-  }
-
   onSelectedCategoryChange(category) {
     this.setState((state) => ({ ...state, selectedCategory: category }));
     api.getProductsFromCategory(category.id)
       .then((data) => this.setState((state) => ({ ...state, products: data.results })));
+  }
+
+  resetSelectedCategory() {
+    this.setState((state) => ({ ...state, selectedCategory: {} }));
   }
 
   searchApi(searchInput) {
@@ -81,24 +110,7 @@ class ProductList extends React.Component {
                 <Link data-testid="shopping-cart-button" to="/cart">Carrinho</Link>
               </div>
             </div>
-            {products[0] === 'initial' && (
-              <h4 data-testid="home-initial-message">
-                Digite algum termo de pesquisa ou escolha uma categoria.
-              </h4>)}
-            {products[0] !== 'initial' && (
-              <div className="row align-items-center">
-                {products.map((product) => (
-                  <ProductCard product={product} />
-                ))}
-              </div>
-            )}
-            {!products.length && (
-              <h4>
-                Nenhum produto foi encontrado
-              </h4>
-            )}
-
-
+            <List products={products} />
           </div>
         </div>
       </div>
