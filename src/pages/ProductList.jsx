@@ -6,20 +6,51 @@ import SearchBar from '../components/SearchBar';
 import CategoriesList from '../components/CategoriesList';
 
 const ProductCard = (props) => {
-  const { product } = props;
+  const { id, thumbnail, title, price } = props.product;
   return (
-    <Link to={`/product/${product.id}`} key={product.id} className="card w-25">
-      <img className="card-img-top" height={150} src={product.thumbnail} alt="" />
-      <div className="card-header">
-        <p className="card-title">{product.title}</p>
+    <div data-testid="product" className="card w-25">
+      <Link data-testid="product-detail-link" to={`/product/${id}`}>
+        <img className="card-img-top" height={150} src={thumbnail} alt="" />
+        <div className="card-header">
+          <p className="card-title">{title}</p>
+        </div>
+      </Link>
+      <div className="card-body row justify-content-center">
+        <p className="card-text text-center">R$ {Number(price).toFixed(2)}</p>
+        <button
+          data-testid="product-add-to-cart"
+          className="btn btn-primary"
+        >
+          Adicionar ao carrinho
+        </button>
       </div>
-      <div className="card-body">
-        <p className="card-text">R$ {Number(product.price).toFixed(2)}</p>
-      </div>
-      <div className="card-body">
-        <button className="btn btn-primary">Adicionar ao carrinho</button>
-      </div>
-    </Link>
+
+    </div>
+
+  );
+};
+
+const List = (props) => {
+  const { products } = props;
+  return (
+    <div>
+      {products[0] === 'initial' && (
+        <h4 data-testid="home-initial-message">
+          Digite algum termo de pesquisa ou escolha uma categoria.
+        </h4>)}
+      {products[0] !== 'initial' && (
+        <div className="row align-items-center">
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+      )}
+      {!products.length && (
+        <h4>
+          Nenhum produto foi encontrado
+        </h4>
+      )}
+    </div>
   );
 };
 
@@ -28,8 +59,9 @@ class ProductList extends React.Component {
     super(props);
     this.state = {
       selectedCategory: {},
-      products: [],
+      products: ['initial'],
     };
+    this.resetSelectedCategory = this.resetSelectedCategory.bind(this);
     this.onSelectedCategoryChange = this.onSelectedCategoryChange.bind(this);
     this.searchApi = this.searchApi.bind(this);
   }
@@ -38,6 +70,10 @@ class ProductList extends React.Component {
     this.setState((state) => ({ ...state, selectedCategory: category }));
     api.getProductsFromCategory(category.id)
       .then((data) => this.setState((state) => ({ ...state, products: data.results })));
+  }
+
+  resetSelectedCategory() {
+    this.setState((state) => ({ ...state, selectedCategory: {} }));
   }
 
   searchApi(searchInput) {
@@ -60,25 +96,21 @@ class ProductList extends React.Component {
             <CategoriesList
               selectedCategory={selectedCategory}
               onSelectCategory={this.onSelectedCategoryChange}
+              resetSelectedCategory={this.resetSelectedCategory}
             />
           </div>
           <div className="col-9">
             <div className="row align-items-center">
-              <SearchBar
-                searchApi={this.searchApi}
-              />
-              <Link data-testid="shopping-cart-button" to="/cart">Carrinho</Link>
+              <div className="col-10">
+                <SearchBar
+                  searchApi={this.searchApi}
+                />
+              </div>
+              <div className="col-2">
+                <Link data-testid="shopping-cart-button" to="/cart">Carrinho</Link>
+              </div>
             </div>
-            {!products.length && (
-              <h4 data-testid="home-initial-message">
-                Digite algum termo de pesquisa ou escolha uma categoria.
-              </h4>)}
-            <div className="row align-items-center">
-              {products.map((product) => (
-                <ProductCard product={product} />
-              ))}
-            </div>
-
+            <List products={products} />
           </div>
         </div>
       </div>
