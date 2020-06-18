@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import * as api from '../services/api';
 import SearchBar from '../components/SearchBar';
 import CategoriesList from '../components/CategoriesList';
@@ -47,6 +49,7 @@ class ProductList extends React.Component {
               <SearchBar
                 searchApi={this.searchApi}
               />
+              <Link to="/cart">Carrinho</Link>
             </div>
             <h4 data-testid="home-initial-message">
               Digite algum termo de pesquisa ou escolha uma categoria.
