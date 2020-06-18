@@ -51,8 +51,8 @@ const List = (props) => {
         </h4>
       )}
     </div>
-  )
-}
+  );
+};
 
 class ProductList extends React.Component {
   constructor(props) {
