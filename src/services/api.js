@@ -33,4 +33,5 @@ export {
   getProductsFromCategory,
   getProductsFromQuery,
   getProductsFromCategoryAndQuery,
+  getProductDetails,
 };
