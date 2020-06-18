@@ -23,7 +23,7 @@ class CategoriesList extends React.Component {
               <button
                 key={category.id}
                 type="button"
-                onClick={() => this.props.onSelectCategory(category)}
+                onClick={() => this.props.resetSelectedCategory()}
                 className="list-group-item list-group-item-action active mb-1"
               >
                 {category.name}
