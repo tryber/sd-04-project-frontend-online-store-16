@@ -19,32 +19,28 @@ class CategoriesList extends React.Component {
     return (
       <div className="card">
         <div className="list-group">
-          {categories
-            .filter((category) => category.id === selectedCategory.id)
-            .map((category) => (
-              <button
-                data-testid="category"
-                key={category.id}
-                type="button"
-                onClick={() => onSelectCategory(category)}
-                className="list-group-item list-group-item-action active mb-1"
-              >
-                {category.name}
-              </button>
-            ))}
-          {categories
-            .filter((category) => category.id !== selectedCategory.id)
-            .map((category) => (
-              <button
-                data-testid="category"
-                key={category.id}
-                type="button"
-                onClick={() => onSelectCategory(category)}
-                className="list-group-item list-group-item-action"
-              >
-                {category.name}
-              </button>
-            ))}
+          {categories.filter((category) => category.id === selectedCategory.id).map((category) => (
+            <button
+              data-testid="category"
+              key={category.id}
+              type="button"
+              onClick={() => onSelectCategory(category)}
+              className="list-group-item list-group-item-action active mb-1"
+            >
+              {category.name}
+            </button>
+          ))}
+          {categories.filter((category) => category.id !== selectedCategory.id).map((category) => (
+            <button
+              data-testid="category"
+              key={category.id}
+              type="button"
+              onClick={() => onSelectCategory(category)}
+              className="list-group-item list-group-item-action"
+            >
+              {category.name}
+            </button>
+          ))}
         </div>
       </div>
     );
