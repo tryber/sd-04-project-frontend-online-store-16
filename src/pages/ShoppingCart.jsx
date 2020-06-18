@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class ShoppingCart extends React.Component {
   constructor(props) {
@@ -7,11 +8,16 @@ class ShoppingCart extends React.Component {
   }
 
   render() {
-    const { products } = this.state;
-    if (products === '') {
-      return <span data-testid="shopping-cart-empty-message">Seu carrinho está vazio</span>;
-    }
-    return <h1>Shopping Cart Page</h1>;
+
+    return (
+      <div className="container-fluid">
+        <div className="column">
+          <Link to="/">Voltar</Link>
+          <h4>Shopping Cart Page</h4>
+          <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
+        </div>
+      </div>
+    );
   }
 }
 

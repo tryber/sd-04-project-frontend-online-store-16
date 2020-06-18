@@ -17,12 +17,16 @@ const ProductCard = (props) => {
       </Link>
       <div className="card-body row justify-content-center">
         <p className="card-text text-center">R$ {Number(price).toFixed(2)}</p>
-        <button
+        <Link
           data-testid="product-add-to-cart"
           className="btn btn-primary"
+          to={{
+            pathname: "/cart",
+            data: props.product,
+          }}
         >
           Adicionar ao carrinho
-        </button>
+        </Link>
       </div>
 
     </div>
