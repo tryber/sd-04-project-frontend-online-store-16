@@ -14,28 +14,32 @@ class CategoriesList extends React.Component {
   }
 
   render() {
+    const { categories } = this.state;
+    const { selectedCategory, onSelectCategory } = this.props;
     return (
       <div className="card">
         <div className="list-group">
-          {this.state.categories
-            .filter((category) => category.id === this.props.selectedCategory.id)
+          {categories
+            .filter((category) => category.id === selectedCategory.id)
             .map((category) => (
               <button
+                data-testid="category"
                 key={category.id}
                 type="button"
-                onClick={() => this.props.onSelectCategory(category)}
+                onClick={() => onSelectCategory(category)}
                 className="list-group-item list-group-item-action active mb-1"
               >
                 {category.name}
               </button>
             ))}
-          {this.state.categories
-            .filter((category) => category.id !== this.props.selectedCategory.id)
+          {categories
+            .filter((category) => category.id !== selectedCategory.id)
             .map((category) => (
               <button
+                data-testid="category"
                 key={category.id}
                 type="button"
-                onClick={() => this.props.onSelectCategory(category)}
+                onClick={() => onSelectCategory(category)}
                 className="list-group-item list-group-item-action"
               >
                 {category.name}

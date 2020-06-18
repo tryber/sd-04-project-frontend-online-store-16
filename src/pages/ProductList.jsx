@@ -35,7 +35,6 @@ class ProductList extends React.Component {
 
   render() {
     const { selectedCategory } = this.state;
-    // data não esta sendo usado ainda pois precisa criar o card dos produtos
     return (
       <div className="container-fluid">
         <div className="row">
