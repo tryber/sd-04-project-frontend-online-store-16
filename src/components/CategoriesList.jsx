@@ -15,7 +15,7 @@ class CategoriesList extends React.Component {
 
   render() {
     return (
-      <div className="card mt-3">
+      <div className="card">
         <div className="list-group">
           {this.state.categories
             .filter((category) => category.id === this.props.selectedCategory.id)

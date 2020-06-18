@@ -23,7 +23,7 @@ class SearchBar extends React.Component {
     return (
       <form
         onSubmit={this.onSubmitHandler}
-        className="form-inline mt-3"
+        className="form-inline"
       >
         <input
           type="text"

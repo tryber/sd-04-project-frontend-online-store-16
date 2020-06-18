@@ -46,11 +46,15 @@ class ProductList extends React.Component {
             />
           </div>
           <div className="col-9">
-            <SearchBar
+            <div className="row align-items-center">
+              <SearchBar
               searchApi={this.searchApi}
               searchText={searchText}
               onSearchTextChange={this.onSearchTextChange}
             />
+            <div>aaaaaa</div>
+            </div>
+            
             <h4 data-testid="home-initial-message">
               Digite algum termo de pesquisa ou escolha uma categoria.
             </h4>
