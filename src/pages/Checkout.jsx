@@ -1,98 +1,91 @@
 import React from 'react';
 
-const CartReview = (props) => {
+const CartReview = () => {
   // const { cart, removeFromCart } = props;
 
   return (
     <section className="my-3">
       <h5>Revise seus produtos</h5>
-      <div className="list-group">
-        <button type="button" className="list-group-item list-group-item-action">1 x Dapibus ac facilisis in</button>
-        <button type="button" className="list-group-item list-group-item-action">1 x Morbi leo risus</button>
-        <button type="button" className="list-group-item list-group-item-action">4 x Porta ac consectetur ac</button>
-        <button type="button" className="list-group-item list-group-item-action">1 x Vestibulum at eros</button>
-      </div>
+      <div className="list-group"></div>
       <div className="row justify-content-end m-0 mt-2">
         <h5>Total: R$ 0.00</h5>
       </div>
     </section>
-  )
-}
+  );
+};
 
-const BuyerInfo = ({ changeFormState, formState }) => {
-  return (
-    <section className="mb-5">
-      <h5>Informacoes do comprador</h5>
-      <form>
-        <div className="row mb-3">
-          <div className="col">
-            <input
-              type="text"
-              name="fullName"
-              data-testid="checkout-fullname"
-              className="form-control"
-              placeholder="Nome Completo"
-              onChange={changeFormState}
-              value={formState.fullName}
-            />
-          </div>
-          <div className="col">
-            <input
-              type="text"
-              data-testid="checkout-cpf"
-              className="form-control"
-              placeholder="CPF"
-              onChange={changeFormState}
-              value={formState.cpf}
-            />
-          </div>
-          <div className="col">
-            <input
-              type="text"
-              data-testid="checkout-email"
-              className="form-control"
-              placeholder="Email"
-              onChange={changeFormState}
-              value={formState.email}
-            />
-          </div>
-          <div className="col">
-            <input
-              type="text"
-              data-testid="checkout-phone"
-              className="form-control"
-              placeholder="Telefone"
-              onChange={changeFormState}
-              value={formState.phone}
-            />
-          </div>
+const BuyerInfo = ({ changeFormState, formState }) => (
+  <section className="mb-5">
+    <h5>Informacoes do comprador</h5>
+    <form>
+      <div className="row mb-3">
+        <div className="col">
+          <input
+            type="text"
+            name="fullName"
+            data-testid="checkout-fullname"
+            className="form-control"
+            placeholder="Nome Completo"
+            onChange={changeFormState}
+            value={formState.fullName}
+          />
         </div>
-        <div className="row">
-          <div className="col-3">
-            <input
-              type="text"
-              data-testid="checkout-cep"
-              className="form-control"
-              placeholder="CEP"
-              onChange={changeFormState}
-              value={formState.cep}
-            />
-          </div>
-          <div className="col">
-            <input
-              type="text"
-              data-testid="checkout-address"
-              className="form-control"
-              placeholder="Endereco"
-              onChange={changeFormState}
-              value={formState.address}
-            />
-          </div>
+        <div className="col">
+          <input
+            type="text"
+            data-testid="checkout-cpf"
+            className="form-control"
+            placeholder="CPF"
+            onChange={changeFormState}
+            value={formState.cpf}
+          />
         </div>
-      </form>
-    </section>
-  )
-}
+        <div className="col">
+          <input
+            type="text"
+            data-testid="checkout-email"
+            className="form-control"
+            placeholder="Email"
+            onChange={changeFormState}
+            value={formState.email}
+          />
+        </div>
+        <div className="col">
+          <input
+            type="text"
+            data-testid="checkout-phone"
+            className="form-control"
+            placeholder="Telefone"
+            onChange={changeFormState}
+            value={formState.phone}
+          />
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-3">
+          <input
+            type="text"
+            data-testid="checkout-cep"
+            className="form-control"
+            placeholder="CEP"
+            onChange={changeFormState}
+            value={formState.cep}
+          />
+        </div>
+        <div className="col">
+          <input
+            type="text"
+            data-testid="checkout-address"
+            className="form-control"
+            placeholder="Endereco"
+            onChange={changeFormState}
+            value={formState.address}
+          />
+        </div>
+      </div>
+    </form>
+  </section>
+);
 
 const PaymentInfo = ({ changeFormState, formState }) => (
   <section>
@@ -144,9 +137,9 @@ const PaymentInfo = ({ changeFormState, formState }) => (
       </div>
     </form>
   </section>
-)
+);
 
-//Preciso receber como props: estado do carrinho
+//  Preciso receber como props: estado do carrinho
 class Checkout extends React.Component {
   constructor(props) {
     super(props);
@@ -158,8 +151,8 @@ class Checkout extends React.Component {
       cep: '',
       address: '',
       paymentMethod: 'boleto',
-    }
-    this.changeFormState = this.changeFormState.bind(this)
+    };
+    this.changeFormState = this.changeFormState.bind(this);
   }
 
   changeFormState(event) {
@@ -173,7 +166,10 @@ class Checkout extends React.Component {
     return (
       <div className="container">
         <CartReview />
-        <BuyerInfo changeFormState={this.changeFormState} formState={{ fullName, email, cpf, phone, cep, address }} />
+        <BuyerInfo
+          changeFormState={this.changeFormState}
+          formState={{ fullName, email, cpf, phone, cep, address }}
+        />
         <PaymentInfo changeFormState={this.changeFormState} formState={{ paymentMethod }} />
         <div className="row justify-content-center">
           <button className="btn btn-primary btn-lg">Comprar</button>
