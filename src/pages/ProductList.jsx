@@ -20,8 +20,8 @@ const ProductCard = (props) => {
         <button className="btn btn-primary">Adicionar ao carrinho</button>
       </div>
     </Link>
-  )
-}
+  );
+};
 
 class ProductList extends React.Component {
   constructor(props) {
