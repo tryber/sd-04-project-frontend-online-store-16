@@ -6,19 +6,19 @@ import SearchBar from '../components/SearchBar';
 import CategoriesList from '../components/CategoriesList';
 
 const ProductCard = (props) => {
-  const { product } = props;
+  const { id, thumbnail, title, price } = props.product;
   return (
     <div data-testid="product" className="card w-25">
-      <Link data-testid="product-detail-link" to={`/product/${product.id}`}>
-        <img className="card-img-top" height={150} src={product.thumbnail} alt="" />
+      <Link data-testid="product-detail-link" to={`/product/${id}`}>
+        <img className="card-img-top" height={150} src={thumbnail} alt="" />
         <div className="card-header">
-          <p className="card-title">{product.title}</p>
+          <p className="card-title">{title}</p>
         </div>
       </Link>
       <div className="card-body row justify-content-center">
-        <p className="card-text text-center">R$ {Number(product.price).toFixed(2)}</p>
+        <p className="card-text text-center">R$ {Number(price).toFixed(2)}</p>
         <button
-          data-test="product-add-to-cart"
+          data-testid="product-add-to-cart"
           className="btn btn-primary"
         >
           Adicionar ao carrinho
