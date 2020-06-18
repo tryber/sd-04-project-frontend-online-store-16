@@ -18,7 +18,7 @@ class ProductList extends React.Component {
   onSelectedCategoryChange(category) {
     this.setState((state) => ({ ...state, selectedCategory: category }));
     api.getProductsFromCategory(category.id)
-      .then((data) => this.setState((state) => ({ ...state, products: data.results })))
+      .then((data) => this.setState((state) => ({ ...state, products: data.results })));
   }
 
   searchApi(searchInput) {

@@ -43,7 +43,7 @@ class CategoriesList extends React.Component {
             ))}
         </div>
       </div>
-    )
+    );
   }
 }
 
