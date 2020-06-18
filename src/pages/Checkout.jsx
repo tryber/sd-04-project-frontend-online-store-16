@@ -1,18 +1,14 @@
 import React from 'react';
 
-const CartReview = () => {
-  // const { cart, removeFromCart } = props;
-
-  return (
-    <section className="my-3">
-      <h5>Revise seus produtos</h5>
-      <div className="list-group"></div>
-      <div className="row justify-content-end m-0 mt-2">
-        <h5>Total: R$ 0.00</h5>
-      </div>
-    </section>
-  );
-};
+const CartReview = () => (
+  <section className="my-3">
+    <h5>Revise seus produtos</h5>
+    <div className="list-group" />
+    <div className="row justify-content-end m-0 mt-2">
+      <h5>Total: R$ 0.00</h5>
+    </div>
+  </section>
+);
 
 const BuyerInfo = ({ changeFormState, formState }) => (
   <section className="mb-5">
