@@ -16,10 +16,10 @@ const ListItems = (props) => {
   const { products } = props;
   return (
     <section>
-      {products[0] === 'initial' && (
+      {products[0] === [] && (
         <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
       )}
-      {products[0] !== 'initial' && (
+      {products[0] !== [] && (
         <div className="row">
           {products.map(product => (
             <CartItemCard key={product.id} product={product} />
@@ -30,15 +30,20 @@ const ListItems = (props) => {
   );
 }
 
+function addProductToCart(product) {
+  const { products } = this.state;
+  this.setState({ products: products.push(product), });
+}
+
 class ShoppingCart extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { products: 'initial' };
+    this.state = { products: [] };
+    addProductToCart = addProductToCart.bind(this);
   }
 
   render() {
     const { products } = this.state;
-
     return (
       <div className="container-fluid">
         <div className="column">
@@ -52,4 +57,4 @@ class ShoppingCart extends React.Component {
   }
 }
 
-export default ShoppingCart;
+export { ShoppingCart, addProductToCart };
