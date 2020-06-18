@@ -41,8 +41,9 @@ class ProductList extends React.Component {
   }
 
   searchApi(searchInput) {
-    if (this.state.selectedCategory.id) {
-      api.getProductsFromCategoryAndQuery(this.state.selectedCategory.id, searchInput)
+    const { selectedCategory } = this.state;
+    if (selectedCategory.id) {
+      api.getProductsFromCategoryAndQuery(selectedCategory.id, searchInput)
         .then((data) => this.setState((state) => ({ ...state, products: data.results })));
     } else {
       api.getProductsFromQuery(searchInput)
@@ -52,7 +53,6 @@ class ProductList extends React.Component {
 
   render() {
     const { selectedCategory, products } = this.state;
-    // data não esta sendo usado ainda pois precisa criar o card dos produtos
     return (
       <div className="container-fluid">
         <div className="row">
@@ -67,7 +67,7 @@ class ProductList extends React.Component {
               <SearchBar
                 searchApi={this.searchApi}
               />
-              <Link to="/cart">Carrinho</Link>
+              <Link data-testid="shopping-cart-button" to="/cart">Carrinho</Link>
             </div>
             {!products.length && (
               <h4 data-testid="home-initial-message">
