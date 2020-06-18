@@ -13,12 +13,14 @@ class SearchBar extends React.Component {
   }
 
   onSubmitHandler(event) {
+    const { searchInput } = this.state;
     const { searchApi } = this.props;
     event.preventDefault();
-    searchApi(this.state.searchInput);
+    searchApi(searchInput);
   }
 
   render() {
+    const { searchInput } = this.state;
     const { searchApi } = this.props;
     return (
       <form
@@ -30,15 +32,15 @@ class SearchBar extends React.Component {
           name="search"
           className="form-control"
           size="50"
-          value={this.state.searchInput}
+          value={searchInput}
           onChange={this.onSearchInputChange}
           data-testid="query-input"
         />
         <button
           type="button"
           className="btn btn-primary mx-1"
-          onClick={() => searchApi(this.state.searchInput)}
           data-testid="query-button"
+          onClick={() => searchApi(searchInput)}
         >
           Pesquisar
         </button>
