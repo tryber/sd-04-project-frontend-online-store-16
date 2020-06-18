@@ -33,7 +33,7 @@ class ProductList extends React.Component {
   }
 
   render() {
-    const { selectedCategory } = this.state;
+    const { selectedCategory, products } = this.state;
     // data não esta sendo usado ainda pois precisa criar o card dos produtos
     return (
       <div className="container-fluid">
@@ -51,9 +51,28 @@ class ProductList extends React.Component {
               />
               <Link to="/cart">Carrinho</Link>
             </div>
-            <h4 data-testid="home-initial-message">
-              Digite algum termo de pesquisa ou escolha uma categoria.
-            </h4>
+            {!products.length && (
+              <h4 data-testid="home-initial-message">
+                Digite algum termo de pesquisa ou escolha uma categoria.
+              </h4>)}
+
+            <div className="row align-items-center">
+              {products.map(product => (
+                <Link to={`/product/${product.id}`} key={product.id} className="card w-25">
+                  <img className="card-img-top"  height={150} src={product.thumbnail} alt="" />
+                  <div className="card-header">
+                    <p className="card-title">{product.title}</p>
+                  </div>
+                  <div className="card-body">
+                    <p className="card-text">R$ {Number(product.price).toFixed(2)}</p>
+                  </div>
+                  <div className="card-body">
+                    <button className="btn btn-primary">Adicionar ao carrinho</button>
+                  </div>
+                </Link>
+              ))}
+            </div>
+
           </div>
         </div>
       </div>

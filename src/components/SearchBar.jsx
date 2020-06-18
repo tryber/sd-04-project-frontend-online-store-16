@@ -32,11 +32,13 @@ class SearchBar extends React.Component {
           size="50"
           value={this.state.searchInput}
           onChange={this.onSearchInputChange}
+          data-testid="query-input"
         />
         <button
           type="button"
           className="btn btn-primary mx-1"
           onClick={() => searchApi(this.state.searchInput)}
+          data-testid="query-button"
         >
           Pesquisar
         </button>
