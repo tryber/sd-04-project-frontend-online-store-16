@@ -52,7 +52,7 @@ class ProductList extends React.Component {
               searchText={searchText}
               onSearchTextChange={this.onSearchTextChange}
             />
-            <div>aaaaaa</div>
+              <div>aaaaaa</div>
             </div>
             
             <h4 data-testid="home-initial-message">
