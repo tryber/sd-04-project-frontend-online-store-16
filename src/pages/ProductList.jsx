@@ -7,7 +7,6 @@ class ProductList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchText: '',
       selectedCategory: {},
       products: [],
     };
@@ -22,8 +21,6 @@ class ProductList extends React.Component {
   }
 
   searchApi(searchInput) {
-    this.setState((state) => ({ ...state, searchText: searchInput }));
-
     if (this.state.selectedCategory.id) {
       api.getProductsFromCategoryAndQuery(this.state.selectedCategory.id, searchInput)
         .then((data) => this.setState((state) => ({ ...state, products: data.results })));
@@ -34,7 +31,7 @@ class ProductList extends React.Component {
   }
 
   render() {
-    const { searchText, selectedCategory } = this.state;
+    const { selectedCategory } = this.state;
     // data não esta sendo usado ainda pois precisa criar o card dos produtos
     return (
       <div className="container-fluid">
@@ -49,8 +46,6 @@ class ProductList extends React.Component {
             <div className="row align-items-center">
               <SearchBar
                 searchApi={this.searchApi}
-                searchText={searchText}
-                onSearchTextChange={this.onSearchTextChange}
               />
             </div>
             <h4 data-testid="home-initial-message">
