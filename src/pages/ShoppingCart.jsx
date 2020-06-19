@@ -10,7 +10,7 @@ const CartItemCard = (props) => {
       <p>{price}</p>
     </div>
   );
-}
+};
 
 const ListItems = (props) => {
   const { products } = props;
@@ -21,25 +21,19 @@ const ListItems = (props) => {
       )}
       {products[0] !== [] && (
         <div className="row">
-          {products.map(product => (
+          {products.map((product) => (
             <CartItemCard key={product.id} product={product} />
           ))}
         </div>
       )}
     </section>
   );
-}
-
-function addProductToCart(product) {
-  const { products } = this.state;
-  this.setState({ products: products.push(product), });
-}
+};
 
 class ShoppingCart extends React.Component {
   constructor(props) {
     super(props);
     this.state = { products: [] };
-    addProductToCart = addProductToCart.bind(this);
   }
 
   render() {
@@ -57,4 +51,4 @@ class ShoppingCart extends React.Component {
   }
 }
 
-export { ShoppingCart, addProductToCart };
+export default ShoppingCart;
