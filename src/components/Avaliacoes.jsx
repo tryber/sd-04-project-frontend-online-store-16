@@ -14,13 +14,9 @@ export default class Avaliacoes extends React.Component {
     this.changeHandler = this.changeHandler.bind(this);
   }
 
+
   componentDidMount() {
-    const { id } = this.props;
-    const avaliacoes = JSON.parse(localStorage.getItem(`${id}`));
-    console.log(avaliacoes);
-    if (avaliacoes) {
-      this.setState({ avaliacoes });
-    }
+    this.getAvaliacoes();
   }
 
   componentDidUpdate() {
@@ -33,6 +29,15 @@ export default class Avaliacoes extends React.Component {
     const { nota, email, text } = this.state;
     event.preventDefault();
     this.setState((state) => ({ avaliacoes: [...state.avaliacoes, { nota, email, text }] }));
+  }
+
+  getAvaliacoes() {
+    const { id } = this.props;
+    const avaliacoes = JSON.parse(localStorage.getItem(`${id}`));
+    console.log(avaliacoes);
+    if (avaliacoes) {
+      this.setState({ avaliacoes });
+    }
   }
 
   changeHandler(event) {
