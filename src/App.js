@@ -15,12 +15,12 @@ class App extends React.Component {
 
   addProductToCart(product) {
     const { cart } = this.state;
-    const cartProduct = cart.find(cartProduct => cartProduct.id === product.id);
-    if(cartProduct){
-      cartProduct.cartQuantity += 1;
+    const foundProduct = cart.find((cartProduct) => cartProduct.id === product.id);
+    if (foundProduct) {
+      foundProduct.cartQuantity += 1;
     } else {
-      product.cartQuantity = 1;
-      this.setState({ cart: [...cart, product] });
+      const newProduct = { ...product, cartQuantity: 1 };
+      this.setState({ cart: [...cart, newProduct] });
     }
   }
 
@@ -28,10 +28,20 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" render={(props) => (<ProductList {...props} addToCart={this.addProductToCart} />)} />
+          <Route
+            exact
+            path="/"
+            render={(props) => (<ProductList {...props} addToCart={this.addProductToCart} />)}
+          />
           <Route path="/product/:id" component={ProductDetails} />
-          <Route path="/cart" render={(props) => (<ShoppingCart {...props} cart={this.state.cart} />)} />
-          <Route path="/checkout" render={(props) => (<Checkout {...props} cart={this.state.cart} />)} />
+          <Route
+            path="/cart"
+            render={(props) => (<ShoppingCart {...props} cart={this.state.cart} />)}
+          />
+          <Route
+            path="/checkout"
+            render={(props) => (<Checkout {...props} cart={this.state.cart} />)}
+          />
         </Switch>
       </BrowserRouter>
     );
