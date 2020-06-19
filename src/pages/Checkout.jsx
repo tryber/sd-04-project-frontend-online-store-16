@@ -1,14 +1,28 @@
 import React from 'react';
 
-const CartReview = () => (
-  <section className="my-3">
-    <h5>Revise seus produtos</h5>
-    <div className="list-group" />
-    <div className="row justify-content-end m-0 mt-2">
-      <h5>Total: R$ 0.00</h5>
-    </div>
-  </section>
-);
+const CartReview = (props) => {
+  const { cart } = props;
+  const total = cart.reduce((acc, product) => product.price + acc, 0);
+  return (
+    <section className="my-3">
+      <h5>Revise seus produtos</h5>
+      <div className="list-group">
+        {cart.map((product) => (
+          <button
+            key={product.id}
+            type="button"
+            className="list-group-item list-group-item-action"
+          >
+            {product.cartQuantity} x {product.title}
+          </button>
+        ))}
+      </div>
+      <div className="row justify-content-end m-0 mt-2">
+        <h5>Total: R$ {total}</h5>
+      </div>
+    </section>
+  );
+};
 
 const BuyerInfo = ({ changeFormState, formState }) => (
   <section className="mb-5">
@@ -29,6 +43,7 @@ const BuyerInfo = ({ changeFormState, formState }) => (
         <div className="col">
           <input
             type="text"
+            name="cpf"
             data-testid="checkout-cpf"
             className="form-control"
             placeholder="CPF"
@@ -39,6 +54,7 @@ const BuyerInfo = ({ changeFormState, formState }) => (
         <div className="col">
           <input
             type="text"
+            name="email"
             data-testid="checkout-email"
             className="form-control"
             placeholder="Email"
@@ -49,6 +65,7 @@ const BuyerInfo = ({ changeFormState, formState }) => (
         <div className="col">
           <input
             type="text"
+            name="phone"
             data-testid="checkout-phone"
             className="form-control"
             placeholder="Telefone"
@@ -61,6 +78,7 @@ const BuyerInfo = ({ changeFormState, formState }) => (
         <div className="col-3">
           <input
             type="text"
+            name="cep"
             data-testid="checkout-cep"
             className="form-control"
             placeholder="CEP"
@@ -71,6 +89,7 @@ const BuyerInfo = ({ changeFormState, formState }) => (
         <div className="col">
           <input
             type="text"
+            name="address"
             data-testid="checkout-address"
             className="form-control"
             placeholder="Endereco"
@@ -82,6 +101,7 @@ const BuyerInfo = ({ changeFormState, formState }) => (
     </form>
   </section>
 );
+
 
 const PaymentInfo = ({ changeFormState, formState }) => (
   <section>
@@ -158,15 +178,15 @@ class Checkout extends React.Component {
   }
 
   render() {
-    const { fullName, email, cpf, phone, cep, address, paymentMethod } = this.state;
+    const { cart } = this.props;
     return (
       <div className="container">
-        <CartReview />
+        <CartReview cart={cart} />
         <BuyerInfo
           changeFormState={this.changeFormState}
-          formState={{ fullName, email, cpf, phone, cep, address }}
+          formState={this.state}
         />
-        <PaymentInfo changeFormState={this.changeFormState} formState={{ paymentMethod }} />
+        <PaymentInfo changeFormState={this.changeFormState} formState={this.state} />
         <div className="row justify-content-center">
           <button className="btn btn-primary btn-lg">Comprar</button>
         </div>
