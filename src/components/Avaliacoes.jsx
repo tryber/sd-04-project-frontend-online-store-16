@@ -1,4 +1,5 @@
 import React from 'react';
+import FormAvalicao from './FormAvaliacao';
 
 export default class Avaliacoes extends React.Component {
   constructor(props) {
@@ -22,8 +23,7 @@ export default class Avaliacoes extends React.Component {
   onSubmitHandler(event) {
     const { nota, email, text, avaliacoes } = this.state;
     event.preventDefault();
-    console.log(nota, email, text);
-    this.setState({ avaliacoes: [...avaliacoes, { nota, email, text }] });
+    this.setState((state) => ({ avaliacoes: [...state.avaliacoes, { nota, email, text }] }));
     console.log(avaliacoes);
   }
 
@@ -33,28 +33,27 @@ export default class Avaliacoes extends React.Component {
   }
 
   render() {
+    const { avaliacoes } = this.state;
     return (
       <div>
         <div className="card mb-3" style={{ maxWidth: '500px' }}>
           <div className="row no-gutters">
             <div className="col-md-8">
               <div className="card-body">
-                <h5 data-testid="product-detail-name" className="card-title">Avalie este produto</h5>
-                <form onSubmit={this.onSubmitHandler}>
-                  <div className="form-group">
-                    <span>E-MAIL</span>
-                    <input type="email" className="form-control" name="email" onChange={this.changeHandler} />
-                  </div>
-                  <div className="form-group">
-                    <input placeholder="Avaliação" name="nota" type="number" min={0} max={5} onChange={this.changeHandler} />
-                  </div>
-                  <div className="form-group">
-                    <textarea className="form-control" name="text" rows="3" onChange={this.changeHandler} />
-                  </div>
-                  <button type="submit" className="btn btn-primary mx-1">Avalie</button>
-                </form>
+                <h5 className="card-title">Avalie este produto</h5>
+                <FormAvalicao
+                  changeHandler={this.changeHandler}
+                  onSubmitHandler={this.onSubmitHandler}
+                />
+                <br />
+                <h5 className="card-title">avaliações</h5>
                 <ul className="list-group">
-                  {/* {state.attributes.map((att) => <li className=" ">{`${att}: ${att}`}</li>)} */}
+                  {avaliacoes.map((av) => (
+                    <li className="list-group-item">
+                      {`${av.email} NOTA: ${av.nota}
+                      ${av.text}`}
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
