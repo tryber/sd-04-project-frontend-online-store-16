@@ -14,6 +14,15 @@ export default class Avaliacoes extends React.Component {
     this.changeHandler = this.changeHandler.bind(this);
   }
 
+  componentDidMount() {
+    const { id } = this.props;
+    const avaliacoes = JSON.parse(localStorage.getItem(`${id}`));
+    console.log(avaliacoes);
+    if (avaliacoes) {
+      this.setState({ avaliacoes });
+    }
+  }
+
   componentDidUpdate() {
     const { id } = this.props;
     const { avaliacoes } = this.state;
@@ -21,10 +30,9 @@ export default class Avaliacoes extends React.Component {
   }
 
   onSubmitHandler(event) {
-    const { nota, email, text, avaliacoes } = this.state;
+    const { nota, email, text } = this.state;
     event.preventDefault();
     this.setState((state) => ({ avaliacoes: [...state.avaliacoes, { nota, email, text }] }));
-    console.log(avaliacoes);
   }
 
   changeHandler(event) {
