@@ -54,7 +54,7 @@ export default class Avaliacoes extends React.Component {
                   <button type="submit" className="btn btn-primary mx-1">Avalie</button>
                 </form>
                 <ul className="list-group">
-                  {/* {state.attributes.map((att) => <li className="list-group-item">{`${att.name}: ${att.value_name}`}</li>)} */}
+                  {/* {state.attributes.map((att) => <li className=" ">{`${att}: ${att}`}</li>)} */}
                 </ul>
               </div>
             </div>

@@ -29,7 +29,8 @@ class ProductDetails extends React.Component {
                 <button type="button" className="btn btn-light">+</button>
                 <button type="button" className="btn btn-primary">Adicionar ao carrinho</button>
                 <ul className="list-group">
-                  {state.attributes.map((att) => <li className="list-group-item">{`${att.name}: ${att.value_name}`}</li>)}
+                  {state.attributes
+                    .map((att) => <li className="list-group-item">{`${att.name}: ${att.value_name}`}</li>)}
                 </ul>
               </div>
             </div>
