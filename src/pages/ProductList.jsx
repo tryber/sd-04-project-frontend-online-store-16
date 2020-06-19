@@ -9,7 +9,7 @@ const ProductCard = (props) => {
   const { id, thumbnail, title, price } = props.product;
   return (
     <div data-testid="product" className="card w-25">
-      <Link data-testid="product-detail-link" to={`/product/${id}`}>
+      <Link data-testid="product-detail-link" to={{ pathname: `/product/${id}`, state: props.product }}>
         <img className="card-img-top" height={150} src={thumbnail} alt="" />
         <div className="card-header">
           <p className="card-title">{title}</p>
