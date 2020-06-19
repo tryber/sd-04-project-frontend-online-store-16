@@ -4,17 +4,44 @@ import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import Checkout from './pages/Checkout';
 import ProductDetails from './pages/ProductDetails';
 import ProductList from './pages/ProductList';
-import { ShoppingCart } from './pages/ShoppingCart';
+import ShoppingCart from './pages/ShoppingCart';
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { cart: [] };
+    this.addProductToCart = this.addProductToCart.bind(this);
+  }
+
+  addProductToCart(product) {
+    const { cart } = this.state;
+    const foundProduct = cart.find((cartProduct) => cartProduct.id === product.id);
+    if (foundProduct) {
+      foundProduct.cartQuantity += 1;
+    } else {
+      const newProduct = { ...product, cartQuantity: 1 };
+      this.setState({ cart: [...cart, newProduct] });
+    }
+  }
+
   render() {
     return (
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" component={ProductList} />
+          <Route
+            exact
+            path="/"
+            render={(props) => (<ProductList {...props} addToCart={this.addProductToCart} />)}
+          />
           <Route path="/product/:id" component={ProductDetails} />
-          <Route path="/cart" component={ShoppingCart} />
-          <Route path="/checkout" component={Checkout} />
+          <Route
+            path="/cart"
+            render={(props) => (<ShoppingCart {...props} cart={this.state.cart} />)}
+          />
+          <Route
+            path="/checkout"
+            render={(props) => (<Checkout {...props} cart={this.state.cart} />)}
+          />
         </Switch>
       </BrowserRouter>
     );
