@@ -4,7 +4,7 @@ import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import Checkout from './pages/Checkout';
 import ProductDetails from './pages/ProductDetails';
 import ProductList from './pages/ProductList';
-import ShoppingCart from './pages/ShoppingCart';
+import { ShoppingCart } from './pages/ShoppingCart';
 
 class App extends React.Component {
   render() {

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import * as api from '../services/api';
 import SearchBar from '../components/SearchBar';
 import CategoriesList from '../components/CategoriesList';
+import { addProductToCart } from './ShoppingCart';
 
 const ProductCard = (props) => {
   const { id, thumbnail, title, price } = props.product;
@@ -20,6 +21,7 @@ const ProductCard = (props) => {
         <button
           data-testid="product-add-to-cart"
           className="btn btn-primary"
+          onClick={() => addProductToCart(props.product)}
         >
           Adicionar ao carrinho
         </button>
