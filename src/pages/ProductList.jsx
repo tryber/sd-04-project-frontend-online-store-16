@@ -20,6 +20,7 @@ const ProductCard = (props) => {
         <button
           data-testid="product-add-to-cart"
           className="btn btn-primary"
+          onClick={() => props.addToCart(props.product)}
         >
           Adicionar ao carrinho
         </button>
@@ -31,7 +32,7 @@ const ProductCard = (props) => {
 };
 
 const List = (props) => {
-  const { products } = props;
+  const { products, addToCart } = props;
   return (
     <div>
       {products[0] === 'initial' && (
@@ -41,7 +42,7 @@ const List = (props) => {
       {products[0] !== 'initial' && (
         <div className="row align-items-center">
           {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard key={product.id} product={product} addToCart={addToCart} />
           ))}
         </div>
       )}
@@ -84,6 +85,7 @@ class ProductList extends React.Component {
 
   render() {
     const { selectedCategory, products } = this.state;
+    const { addToCart } = this.props;
     return (
       <div className="container-fluid">
         <div className="row">
@@ -105,7 +107,7 @@ class ProductList extends React.Component {
                 <Link data-testid="shopping-cart-button" to="/cart">Carrinho</Link>
               </div>
             </div>
-            <List products={products} />
+            <List products={products} addToCart={addToCart} />
           </div>
         </div>
       </div>
