@@ -2,7 +2,7 @@ import React from 'react';
 
 const CartReview = (props) => {
   const { cart } = props;
-  const total = cart.reduce((acc, product) => product.cartQuantity * product.price + acc, 0);
+  const total = cart.reduce((acc, product) => (product.cartQuantity * product.price) + acc, 0);
   return (
     <section className="my-3">
       <h5>Revise seus produtos</h5>
