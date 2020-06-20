@@ -38,7 +38,7 @@ class SearchBar extends React.Component {
         />
         <button
           type="button"
-          className="btn btn-primary mx-1"
+          className="btn btn-primary ml-3"
           data-testid="query-button"
           onClick={() => searchApi(searchInput)}
         >

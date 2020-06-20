@@ -18,18 +18,24 @@ class CategoriesList extends React.Component {
     const { selectedCategory, onSelectCategory, resetSelectedCategory } = this.props;
     return (
       <div className="card">
-        <div className="list-group">
+        <div className="card-header">
+          <h4 className="text-center">Categorias</h4>
+        </div>
+        <div className="list-group list-group-flush">
+          {selectedCategory.id && (<li className="list-group-item disabled text-center">Categoria selecionada</li>)}
           {categories.filter((category) => category.id === selectedCategory.id).map((category) => (
             <button
               data-testid="category"
               key={category.id}
               type="button"
               onClick={() => resetSelectedCategory(category)}
-              className="list-group-item list-group-item-action active mb-1"
+              className="list-group-item list-group-item-action active"
             >
               {category.name}
             </button>
           ))}
+          <li className="list-group-item disabled text-center">Todas categorias</li>
+
           {categories.filter((category) => category.id !== selectedCategory.id).map((category) => (
             <button
               data-testid="category"

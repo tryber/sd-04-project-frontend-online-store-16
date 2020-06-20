@@ -18,6 +18,7 @@ class App extends React.Component {
     const foundProduct = cart.find((cartProduct) => cartProduct.id === product.id);
     if (foundProduct) {
       foundProduct.cartQuantity += 1;
+      this.setState({ cart: [...cart] });
     } else {
       const newProduct = { ...product, cartQuantity: 1 };
       this.setState({ cart: [...cart, newProduct] });
@@ -31,7 +32,7 @@ class App extends React.Component {
           <Route
             exact
             path="/"
-            render={(props) => (<ProductList {...props} addToCart={this.addProductToCart} />)}
+            render={(props) => (<ProductList {...props} cart={this.state.cart} addToCart={this.addProductToCart} />)}
           />
           <Route path="/product/:id" component={ProductDetails} />
           <Route
