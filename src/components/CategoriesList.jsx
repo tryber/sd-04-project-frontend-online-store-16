@@ -22,8 +22,8 @@ const AllCategories = (props) => {
           </button>
         ))}
     </div>
-  )
-}
+  );
+};
 
 const SelectedCategory = (props) => {
   const { categories, selectedCategory, resetSelectedCategory } = props;
@@ -51,8 +51,8 @@ const SelectedCategory = (props) => {
           </button>
         ))}
     </div>
-  )
-}
+  );
+};
 
 const Categories = (props) => {
   const { selectedCategory, onSelectCategory, resetSelectedCategory, categories } = props;
@@ -69,8 +69,8 @@ const Categories = (props) => {
         onSelectCategory={onSelectCategory}
       />
     </div>
-  )
-}
+  );
+};
 
 class CategoriesList extends React.Component {
   constructor(props) {

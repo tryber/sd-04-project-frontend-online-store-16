@@ -26,7 +26,7 @@ const ReviewCart = (props) => {
       </li>
     </ul>
   );
-}
+};
 
 const CartReview = (props) => {
   const { cart } = props;

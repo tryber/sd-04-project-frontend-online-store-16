@@ -74,14 +74,14 @@ class ProductList extends React.Component {
     this.filterProducts = this.filterProducts.bind(this);
   }
 
-  filterProducts(products) {
-    this.setState((state) => ({ ...state, products }));
-  }
-
   onSelectedCategoryChange(category) {
     this.setState((state) => ({ ...state, selectedCategory: category }));
     api.getProductsFromCategoryAndQuery(category.id, '')
       .then((data) => this.setState((state) => ({ ...state, products: data.results })));
+  }
+
+  filterProducts(products) {
+    this.setState((state) => ({ ...state, products }));
   }
 
   resetSelectedCategory() {
@@ -116,7 +116,7 @@ class ProductList extends React.Component {
               </div>
               <div className="col-2 pl-0">
                 <Link className="d-flex align-items-center" data-testid="shopping-cart-button" to="/cart">
-                  <FaShoppingCart className="mr-1" size={32} /> {totalCart} {totalCart === 1 ? ('item') : ('itens')}
+                  <FaShoppingCart className="mr-1" size={32} /> {totalCart} {totalCart === 1 ? 'item' : 'itens'}
                 </Link>
               </div>
             </div>

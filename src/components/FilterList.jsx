@@ -46,14 +46,12 @@ const OrderBy = (props) => {
       </select>
     </label>
   );
-}
+};
 
 class FilterList extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      order: 'none',
-    };
+    this.state = { order: 'none' };
     this.onFilterChange = this.onFilterChange.bind(this);
   }
 
