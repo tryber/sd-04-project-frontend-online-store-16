@@ -61,6 +61,32 @@ const List = (props) => {
   );
 };
 
+const HeaderMenu = (props) => {
+  const { totalCart, searchApi, products, filterProducts } = props;
+  return (
+    <div>
+      <div className="row align-items-center">
+        <div className="col pr-0">
+          <SearchBar searchApi={searchApi} />
+        </div>
+        <div className="col-2 pl-0">
+          <Link
+            className="d-flex align-items-center"
+            data-testid="shopping-cart-button"
+            to="/cart"
+          >
+            <FaShoppingCart className="mr-1" size={32} />
+            {totalCart} {totalCart === 1 ? 'item' : 'itens'}
+          </Link>
+        </div>
+      </div>
+      <div className="row">
+        <FilterList products={products} filterProducts={filterProducts} />
+      </div>
+    </div>
+  );
+}
+
 class ProductList extends React.Component {
   constructor(props) {
     super(props);
@@ -110,19 +136,12 @@ class ProductList extends React.Component {
             />
           </div>
           <div className="col-9">
-            <div className="row align-items-center">
-              <div className="col pr-0">
-                <SearchBar searchApi={this.searchApi} />
-              </div>
-              <div className="col-2 pl-0">
-                <Link className="d-flex align-items-center" data-testid="shopping-cart-button" to="/cart">
-                  <FaShoppingCart className="mr-1" size={32} /> {totalCart} {totalCart === 1 ? 'item' : 'itens'}
-                </Link>
-              </div>
-            </div>
-            <div className="row">
-              <FilterList products={products} filterProducts={this.filterProducts} />
-            </div>
+            <HeaderMenu
+              products={products}
+              totalCart={totalCart}
+              searchApi={this.searchApi}
+              filterProducts={this.filterProducts}
+            />
             <div className="row">
               <div className="col-12">
                 <List products={products} cart={cart} addToCart={addToCart} />
