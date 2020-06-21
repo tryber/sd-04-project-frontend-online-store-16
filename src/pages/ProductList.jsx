@@ -15,7 +15,11 @@ const ProductCard = (props) => {
   return (
     <div className="col-4 mb-4">
       <div data-testid="product" className={`card ${isInCart ? 'bg-success text-white' : ''}`}>
-        <Link className={`${isInCart ? 'text-white' : ''}`} data-testid="product-detail-link" to={`/product/${id}`}>
+        <Link
+          className={`${isInCart ? 'text-white' : ''}`}
+          data-testid="product-detail-link"
+          to={{ pathname: `/product/${id}`, state: props.product }}
+         >
           <img className="card-img-top img-responsive" height={150} src={thumbnail} alt="" />
           <div className="card-header text-center min-height">
             {title}
