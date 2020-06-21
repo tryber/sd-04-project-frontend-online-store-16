@@ -1,6 +1,33 @@
 import React from 'react';
 import { FaShoppingCart, FaUserEdit, FaCreditCard } from 'react-icons/fa';
 
+const ReviewCart = (props) => {
+  const { cart, totalPrice } = props;
+  return (
+    <ul className="list-group">
+      {cart.map((product) => (
+        <li
+          key={product.id}
+          className="list-group-item d-flex justify-content-between lh-condensed"
+        >
+          <div>
+            <p className="my-0">{product.title}</p>
+            <small className="text-muted">
+              {product.cartQuantity} {product.cartQuantity === 1 ? 'unidade' : 'unidades'}
+            </small>
+          </div>
+          <span className="text-muted ml-2">
+            R${(product.cartQuantity * product.price).toFixed(2)}
+          </span>
+        </li>
+      ))}
+      <li className="list-group-item d-flex justify-content-between lh-condensed">
+        <span>Total: </span><strong>R${totalPrice.toFixed(2)}</strong>
+      </li>
+    </ul>
+  );
+}
+
 const CartReview = (props) => {
   const { cart } = props;
   const totalPrice = cart.reduce((acc, product) => (product.cartQuantity * product.price) + acc, 0);
@@ -8,36 +35,23 @@ const CartReview = (props) => {
   return (
     <section className="my-3">
       <h4 className="d-flex justify-content-between align-items-center mb-3">
-        <span className="text-muted d-flex align-items-center"><FaShoppingCart className="mr-1" /> Seu carrinho</span>
-        <span className="badge badge-secondary badge-pill">{totalQuantity}</span>
+        <span className="text-muted d-flex align-items-center">
+          <FaShoppingCart className="mr-1" /> Seu carrinho
+        </span>
+        <span className="badge badge-secondary badge-pill">
+          {totalQuantity}
+        </span>
       </h4>
-      <ul className="list-group">
-        {cart.map((product) => (
-          <li
-            key={product.id}
-            className="list-group-item d-flex justify-content-between lh-condensed"
-          >
-            <div>
-              <p className="my-0">{product.title}</p>
-              <small className="text-muted">{product.cartQuantity} unidade(s)</small>
-            </div>
-            <span className="text-muted ml-2"> R${(product.cartQuantity * product.price).toFixed(2)}</span>
-          </li>
-        ))}
-        <li
-          className="list-group-item d-flex justify-content-between lh-condensed"
-        >
-          <span>Total: </span>
-          <strong>R${totalPrice.toFixed(2)}</strong>
-        </li>
-      </ul>
+      <ReviewCart cart={cart} totalPrice={totalPrice} />
     </section>
   );
 };
 
 const BuyerInfo = ({ changeFormState, formState }) => (
   <section className="mt-3 mb-5">
-    <h4 className="mb-3 d-flex align-items-center"><FaUserEdit className="mr-1" /> Informacoes do comprador</h4>
+    <h4 className="mb-3 d-flex align-items-center">
+      <FaUserEdit className="mr-1" /> Informacoes do comprador
+    </h4>
     <form>
       <div className="row mb-3">
         <div className="col">
@@ -123,7 +137,9 @@ const BuyerInfo = ({ changeFormState, formState }) => (
 const PaymentInfo = ({ changeFormState, formState }) => (
   <section className="mb-5">
     <hr className="mb-4" />
-    <h4 className="mb-3 d-flex align-items-center"><FaCreditCard className="mr-1"/>Metodo de pagamento</h4>
+    <h4 className="mb-3 d-flex align-items-center">
+      <FaCreditCard className="mr-1" /> Metodo de pagamento
+    </h4>
     <form value={formState.paymentMethod}>
       <div className="form-check">
         <input
