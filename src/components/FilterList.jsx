@@ -88,6 +88,6 @@ class FilterList extends React.Component {
       </div>
     );
   }
-};
+}
 
 export default FilterList;

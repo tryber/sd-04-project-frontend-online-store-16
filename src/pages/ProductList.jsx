@@ -85,7 +85,7 @@ const HeaderMenu = (props) => {
       </div>
     </div>
   );
-}
+};
 
 class ProductList extends React.Component {
   constructor(props) {
