@@ -25,7 +25,7 @@ const ListItems = (props) => {
             <CartItemCard key={product.id} product={product} />
           ))}
         </div>
-        )}
+      )}
     </section>
   );
 };
