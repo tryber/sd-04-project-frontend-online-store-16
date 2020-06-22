@@ -26,7 +26,7 @@ const CartItemCartQuantity = (props) => {
       </button>
     </div>
   );
-}
+};
 
 const CartItemCard = (props) => {
   const { product, increaseOrDecreaseProductQuantity, removeProductFromCart } = props;
@@ -34,7 +34,10 @@ const CartItemCard = (props) => {
   return (
     <li className="list-group-item d-flex align-items-center justify-content-between">
       <div className="d-flex align-items-center">
-        <button className="mx-2 btn p-0 bg-transparent" onClick={() => removeProductFromCart(product)}>
+        <button
+          className="mx-2 btn p-0 bg-transparent"
+          onClick={() => removeProductFromCart(product)}
+        >
           <FaTrashAlt className="mx-2" />
         </button>
         <img src={thumbnail} height={100} alt="" />
@@ -54,25 +57,31 @@ const CartItemCard = (props) => {
 
 const ListItems = (props) => {
   const { products, increaseOrDecreaseProductQuantity, removeProductFromCart } = props;
-  const totalPrice = products.reduce((acc, product) => (product.price * product.cartQuantity) + acc, 0);
+  const totalPrice = products.reduce((acc, product) => {
+    return (product.price * product.cartQuantity) + acc;
+  }, 0);
   return (
     <div className="card w-100 mb-3">
       <div className="card-header text-center">
         Carrinho de compras
       </div>
       {!products.length ? (
-        <p className="text-center m-3" data-testid="shopping-cart-empty-message">Seu carrinho está vazio :(</p>
+        <p className="text-center m-3" data-testid="shopping-cart-empty-message">
+          Seu carrinho está vazio :(
+        </p>
       ) : (
-          <ul className="list-group list-group-flush">
-            {products.map((product) => (
-              <CartItemCard
-                key={product.id}
-                product={product}
-                removeProductFromCart={removeProductFromCart}
-                increaseOrDecreaseProductQuantity={increaseOrDecreaseProductQuantity}
-              />
+        <ul className="list-group list-group-flush">
+          {products.map((product) => (
+            <CartItemCard
+              key={product.id}
+              product={product}
+              removeProductFromCart={removeProductFromCart}
+              increaseOrDecreaseProductQuantity={increaseOrDecreaseProductQuantity}
+            />
             ))}
-            <li className="list-group-item d-flex justify-content-end ">Total: R$ {totalPrice.toFixed(2)}</li>
+            <li className="list-group-item d-flex justify-content-end ">
+              Total: R$ {totalPrice.toFixed(2)}
+            </li>
           </ul>
         )}
     </div>
