@@ -2,6 +2,32 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaTrashAlt, FaPlus, FaMinus } from 'react-icons/fa';
 
+const CartItemCartQuantity = (props) => {
+  const { cartQuantity, increaseOrDecreaseProductQuantity, product } = props;
+  return (
+    <div className="d-flex align-items-center">
+      <small>Quantidade: </small>
+      <button
+        className="mx-2 btn p-0 bg-transparent"
+        data-testid="product-decrease-quantity"
+        onClick={() => increaseOrDecreaseProductQuantity(product, false)}
+      >
+        <FaMinus size={12} />
+      </button>
+      <p className="mb-0 mx-2">
+        <strong data-testid="shopping-cart-product-quantity">{cartQuantity}</strong>
+      </p>
+      <button
+        className="mx-2 my-0 btn p-0 bg-transparent"
+        data-testid="product-increase-quantity"
+        onClick={() => increaseOrDecreaseProductQuantity(product)}
+      >
+        <FaPlus size={12} />
+      </button>
+    </div>
+  );
+}
+
 const CartItemCard = (props) => {
   const { product, increaseOrDecreaseProductQuantity, removeProductFromCart } = props;
   const { thumbnail, title, price, cartQuantity } = product;
@@ -17,26 +43,11 @@ const CartItemCard = (props) => {
           <p>R$ {Number(price).toFixed(2)}</p>
         </div>
       </div>
-      <div className="d-flex align-items-center">
-        <small>Quantidade: </small>
-        <button
-          className="mx-2 btn p-0 bg-transparent"
-          data-testid="product-decrease-quantity"
-          onClick={() => increaseOrDecreaseProductQuantity(product, false)}
-        >
-          <FaMinus size={12} />
-        </button>
-        <p className="mb-0 mx-2">
-          <strong data-testid="shopping-cart-product-quantity">{cartQuantity}</strong>
-        </p>
-        <button
-          className="mx-2 my-0 btn p-0 bg-transparent"
-          data-testid="product-increase-quantity"
-          onClick={() => increaseOrDecreaseProductQuantity(product)}
-        >
-          <FaPlus size={12} />
-        </button>
-      </div>
+      <CartItemCartQuantity
+        product={product}
+        cartQuantity={cartQuantity}
+        increaseOrDecreaseProductQuantity={increaseOrDecreaseProductQuantity}
+      />
     </li>
   );
 };

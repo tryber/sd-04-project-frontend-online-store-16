@@ -50,33 +50,28 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         <Switch>
-          <Route
-            exact
-            path="/"
+          <Route exact path="/"
             render={(props) => (
               <ProductList {...props} cart={this.state.cart} addToCart={this.addProductToCart} />
             )}
           />
-          <Route
-            path="/product/:id"
-            render={(props) => (<ProductDetails
-              {...props}
+          <Route path="/product/:id"
+            render={(props) => (<ProductDetails {...props}
               cart={this.state.cart}
               addToCart={this.addProductToCart}
-              increaseOrDecreaseProductQuantity={this.increaseOrDecreaseProductQuantity} />
-            )} />
-          <Route
-            path="/cart"
-            render={(props) => (<ShoppingCart
-              {...props}
+              increaseOrDecreaseProductQuantity={this.increaseOrDecreaseProductQuantity}
+            />
+            )}
+          />
+          <Route path="/cart"
+            render={(props) => (<ShoppingCart {...props}
               cart={this.state.cart}
               removeProductFromCart={this.removeProductFromCart}
               increaseOrDecreaseProductQuantity={this.increaseOrDecreaseProductQuantity}
             />
             )}
           />
-          <Route
-            path="/checkout"
+          <Route path="/checkout"
             render={(props) => (<Checkout {...props} cart={this.state.cart} />)}
           />
         </Switch>
