@@ -52,8 +52,7 @@ class ProductDetails extends React.Component {
                 {state.shipping.free_shipping && (
                   <span data-testid="free-shipping" className="bg-success p-2 br-5 ml-1">
                     <FaTruck className="mr-1" /> Frete gratis
-                  </span>
-                )}
+                  </span>)}
                 <ul className="list-group">
                   {state.attributes
                     .map((att) => <li key={att.name} className="list-group-item">{`${att.name}: ${att.value_name}`}</li>)}
