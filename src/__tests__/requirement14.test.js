@@ -22,11 +22,11 @@ describe('A quantidade de produtos adicionados ao carrinho deve ser limitada pel
     fireEvent.click(screen.getAllByTestId('product-add-to-cart')[1]);
     fireEvent.click(screen.getByTestId('shopping-cart-button'));
     await waitFor(() => expect(screen.getAllByTestId('shopping-cart-product-name')));
-    expect(screen.getAllByTestId('shopping-cart-product-name')[1]).toHaveTextContent(mockedQueryResult.results[1].title);
-    expect(screen.getAllByTestId('shopping-cart-product-quantity')[1]).toHaveTextContent('1');
-    fireEvent.click(screen.getAllByTestId('product-increase-quantity')[1]);
-    fireEvent.click(screen.getAllByTestId('product-increase-quantity')[1]);
-    fireEvent.click(screen.getAllByTestId('product-increase-quantity')[1]);
-    expect(screen.getAllByTestId('shopping-cart-product-quantity')[1]).toHaveTextContent(mockedQueryResult.results[1].available_quantity);
+    expect(screen.getAllByTestId('shopping-cart-product-name')[0]).toHaveTextContent(mockedQueryResult.results[1].title);
+    expect(screen.getAllByTestId('shopping-cart-product-quantity')[0]).toHaveTextContent('1');
+    fireEvent.click(screen.getAllByTestId('product-increase-quantity')[0]);
+    fireEvent.click(screen.getAllByTestId('product-increase-quantity')[0]);
+    fireEvent.click(screen.getAllByTestId('product-increase-quantity')[0]);
+    expect(screen.getAllByTestId('shopping-cart-product-quantity')[0]).toHaveTextContent(mockedQueryResult.results[1].available_quantity);
   });
 });

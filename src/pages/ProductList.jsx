@@ -10,7 +10,7 @@ import FilterList from '../components/FilterList';
 import './ProductList.css';
 
 const ProductCard = (props) => {
-  const { id, thumbnail, title, price } = props.product;
+  const { id, thumbnail, title, price, available_quantity } = props.product;
   const isInCart = props.cart.some((cartProduct) => cartProduct.id === id);
   return (
     <div className="col-4 mb-4">
@@ -27,6 +27,7 @@ const ProductCard = (props) => {
         </Link>
         <div className="card-body d-flex flex-column justify-content-center">
           <p className="card-text text-center">R$ {Number(price).toFixed(2)}</p>
+          <p>{available_quantity}</p>
           <button
             data-testid="product-add-to-cart"
             className="btn btn-primary"
