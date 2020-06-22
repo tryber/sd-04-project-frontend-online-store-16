@@ -46,34 +46,30 @@ class App extends React.Component {
     }
   }
 
+  generateRoute(path, render, exact = false) {
+    return <Route exact={exact} path={path} render={render} />;
+  }
+
   render() {
     return (
       <BrowserRouter>
         <Switch>
-          <Route exact path="/"
-            render={(props) => (
-              <ProductList {...props} cart={this.state.cart} addToCart={this.addProductToCart} />
-            )}
-          />
-          <Route path="/product/:id"
-            render={(props) => (<ProductDetails {...props}
-              cart={this.state.cart}
-              addToCart={this.addProductToCart}
-              increaseOrDecreaseProductQuantity={this.increaseOrDecreaseProductQuantity}
-            />
-            )}
-          />
-          <Route path="/cart"
-            render={(props) => (<ShoppingCart {...props}
-              cart={this.state.cart}
-              removeProductFromCart={this.removeProductFromCart}
-              increaseOrDecreaseProductQuantity={this.increaseOrDecreaseProductQuantity}
-            />
-            )}
-          />
-          <Route path="/checkout"
-            render={(props) => (<Checkout {...props} cart={this.state.cart} />)}
-          />
+          {this.generateRoute('/', (props) => (
+            <ProductList {...props} cart={this.state.cart} addToCart={this.addProductToCart} />
+          ), true)}
+          {this.generateRoute('/product/:id', (props) => (<ProductDetails {...props}
+            cart={this.state.cart}
+            addToCart={this.addProductToCart}
+            increaseOrDecreaseProductQuantity={this.increaseOrDecreaseProductQuantity}
+          />))}
+          {this.generateRoute('/cart', (props) => (<ShoppingCart {...props}
+            cart={this.state.cart}
+            removeProductFromCart={this.removeProductFromCart}
+            increaseOrDecreaseProductQuantity={this.increaseOrDecreaseProductQuantity}
+          />))}
+          {this.generateRoute('/checkout', (props) => 
+            (<Checkout {...props} cart={this.state.cart} />)
+          )}
         </Switch>
       </BrowserRouter>
     );
