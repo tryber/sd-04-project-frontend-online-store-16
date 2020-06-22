@@ -1,6 +1,6 @@
 import React from 'react';
-import Avaliacoes from '../components/Avaliacoes';
 import { FaTruck } from 'react-icons/fa';
+import Avaliacoes from '../components/Avaliacoes';
 
 class ProductDetails extends React.Component {
   render() {
@@ -10,7 +10,6 @@ class ProductDetails extends React.Component {
         <div className="card mb-3" style={{ maxWidth: '700px' }}>
           <div className="row no-gutters">
             <div className="col-md-4">
-
               <img src={state.thumbnail} className="card-img" alt="..." />
             </div>
             <div className="col-md-8">
@@ -22,10 +21,9 @@ class ProductDetails extends React.Component {
                 <button type="button" className="btn btn-light">+</button>
                 <button type="button" className="btn btn-primary">Adicionar ao carrinho</button>
                 {state.shipping.free_shipping && (
-                  <span data-testid="free-shipping" className="bg-success color-white p-2 br-5 ml-1">
+                  <span data-testid="free-shipping" className="bg-success p-2 br-5 ml-1">
                     <FaTruck className="mr-1" /> Frete gratis
-                  </span>
-                )}
+                  </span>)}
                 <ul className="list-group">
                   {state.attributes
                     .map((att) => <li key={att.name} className="list-group-item">{`${att.name}: ${att.value_name}`}</li>)}
