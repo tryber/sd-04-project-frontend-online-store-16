@@ -69,20 +69,20 @@ const ListItems = (props) => {
           Seu carrinho está vazio :(
         </p>
       ) : (
-          <ul className="list-group list-group-flush">
-            {products.map((product) => (
-              <CartItemCard
-                key={product.id}
-                product={product}
-                removeProductFromCart={removeProductFromCart}
-                increaseOrDecreaseProductQuantity={increaseOrDecreaseProductQuantity}
-              />
-            ))}
-            <li className="list-group-item d-flex justify-content-end ">
-              Total: R$ {totalPrice.toFixed(2)}
-            </li>
-          </ul>
-        )}
+        <ul className="list-group list-group-flush">
+          {products.map((product) => (
+            <CartItemCard
+              key={product.id}
+              product={product}
+              removeProductFromCart={removeProductFromCart}
+              increaseOrDecreaseProductQuantity={increaseOrDecreaseProductQuantity}
+            />
+          ))}
+          <li className="list-group-item d-flex justify-content-end ">
+            Total: R$ {totalPrice.toFixed(2)}
+          </li>
+        </ul>
+      )}
     </div>
   );
 };
