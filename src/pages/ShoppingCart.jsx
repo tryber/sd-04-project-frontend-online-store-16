@@ -57,9 +57,8 @@ const CartItemCard = (props) => {
 
 const ListItems = (props) => {
   const { products, increaseOrDecreaseProductQuantity, removeProductFromCart } = props;
-  const totalPrice = products.reduce((acc, product) => {
-    return (product.price * product.cartQuantity) + acc;
-  }, 0);
+  const totalPrice = products.reduce((acc, product) => (product.price * product.cartQuantity) + acc
+    , 0);
   return (
     <div className="card w-100 mb-3">
       <div className="card-header text-center">
@@ -70,14 +69,14 @@ const ListItems = (props) => {
           Seu carrinho está vazio :(
         </p>
       ) : (
-        <ul className="list-group list-group-flush">
-          {products.map((product) => (
-            <CartItemCard
-              key={product.id}
-              product={product}
-              removeProductFromCart={removeProductFromCart}
-              increaseOrDecreaseProductQuantity={increaseOrDecreaseProductQuantity}
-            />
+          <ul className="list-group list-group-flush">
+            {products.map((product) => (
+              <CartItemCard
+                key={product.id}
+                product={product}
+                removeProductFromCart={removeProductFromCart}
+                increaseOrDecreaseProductQuantity={increaseOrDecreaseProductQuantity}
+              />
             ))}
             <li className="list-group-item d-flex justify-content-end ">
               Total: R$ {totalPrice.toFixed(2)}
