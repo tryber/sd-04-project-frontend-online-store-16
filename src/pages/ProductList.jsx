@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaShoppingCart } from 'react-icons/fa';
+import { FaShoppingCart, FaTruck } from 'react-icons/fa';
 
 import * as api from '../services/api';
 import SearchBar from '../components/SearchBar';
@@ -10,7 +10,7 @@ import FilterList from '../components/FilterList';
 import './ProductList.css';
 
 const ProductCard = (props) => {
-  const { id, thumbnail, title, price } = props.product;
+  const { id, thumbnail, title, price, shipping } = props.product;
   const isInCart = props.cart.some((cartProduct) => cartProduct.id === id);
   return (
     <div className="col-4 mb-4">
@@ -20,6 +20,12 @@ const ProductCard = (props) => {
           data-testid="product-detail-link"
           to={{ pathname: `/product/${id}`, state: props.product }}
         >
+          {shipping.free_shipping && (
+            <span data-testid="free-shipping" className="badge badge-success ml-1">
+              <FaTruck className="mr-1" /> Frete gratis
+            </span>
+          )}
+
           <img className="card-img-top img-responsive" height={150} src={thumbnail} alt="" />
           <div className="card-header text-center min-height">
             {title}
