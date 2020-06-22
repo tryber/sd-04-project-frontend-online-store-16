@@ -22,14 +22,9 @@ const ProductCard = (props) => {
         >
           {shipping.free_shipping && (
             <span data-testid="free-shipping" className="badge badge-success ml-1">
-              <FaTruck className="mr-1" /> Frete gratis
-            </span>
-          )}
-
+              <FaTruck className="mr-1" /> Frete gratis</span>)}
           <img className="card-img-top img-responsive" height={150} src={thumbnail} alt="" />
-          <div className="card-header text-center min-height">
-            {title}
-          </div>
+          <div className="card-header text-center min-height">{title}</div>
         </Link>
         <div className="card-body d-flex flex-column justify-content-center">
           <p className="card-text text-center">R$ {Number(price).toFixed(2)}</p>
