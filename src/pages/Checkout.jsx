@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { FaShoppingCart, FaUserEdit, FaCreditCard } from 'react-icons/fa';
 
 const ReviewCart = (props) => {
@@ -48,7 +49,7 @@ const CartReview = (props) => {
 };
 
 const BuyerInfo = ({ changeFormState, formState }) => (
-  <section className="mt-3 mb-5">
+  <section className="mt-3 mb-4">
     <h4 className="mb-3 d-flex align-items-center">
       <FaUserEdit className="mr-1" /> Informacoes do comprador
     </h4>
@@ -135,7 +136,7 @@ const BuyerInfo = ({ changeFormState, formState }) => (
 
 
 const PaymentInfo = ({ changeFormState, formState }) => (
-  <section className="mb-5">
+  <section className="mb-4">
     <hr className="mb-4" />
     <h4 className="mb-3 d-flex align-items-center">
       <FaCreditCard className="mr-1" /> Metodo de pagamento
@@ -215,6 +216,9 @@ class Checkout extends React.Component {
     const { cart } = this.props;
     return (
       <div className="container">
+        <div className="row justify-content-start mt-3">
+          <Link to="/cart">Voltar</Link>
+        </div>
         <div className="row">
           <div className="col-8">
             <BuyerInfo
@@ -222,14 +226,12 @@ class Checkout extends React.Component {
               formState={this.state}
             />
             <PaymentInfo changeFormState={this.changeFormState} formState={this.state} />
-            <button className="btn btn-primary btn-block btn-lg">Comprar</button>
+            <button className="btn btn-primary btn-block btn-lg mb-3">Comprar</button>
           </div>
           <div className="col-4">
             <CartReview cart={cart} />
           </div>
         </div>
-
-
       </div>
     );
   }

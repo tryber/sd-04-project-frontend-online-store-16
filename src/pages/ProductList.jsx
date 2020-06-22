@@ -80,7 +80,9 @@ const HeaderMenu = (props) => {
             to="/cart"
           >
             <FaShoppingCart className="mr-1" size={32} />
-            {totalCart} {totalCart === 1 ? 'item' : 'itens'}
+            <p className="mb-0">
+              <span data-testid="shopping-cart-size">{totalCart}</span> {totalCart === 1 ? 'item' : 'itens'}
+            </p>
           </Link>
         </div>
       </div>

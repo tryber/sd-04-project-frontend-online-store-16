@@ -11,13 +11,38 @@ class App extends React.Component {
     super(props);
     this.state = { cart: [] };
     this.addProductToCart = this.addProductToCart.bind(this);
+    this.increaseOrDecreaseProductQuantity = this.increaseOrDecreaseProductQuantity.bind(this);
+    this.removeProductFromCart = this.removeProductFromCart.bind(this);
+  }
+
+  increaseOrDecreaseProductQuantity(product, increase = true) {
+    const { cart } = this.state;
+    const foundProduct = cart.find((cartProduct) => cartProduct.id === product.id);
+    if (increase) {
+      if (foundProduct.cartQuantity < foundProduct.available_quantity) {
+        foundProduct.cartQuantity += 1;
+      }
+    } else {
+      if (foundProduct.cartQuantity > 1) {
+        foundProduct.cartQuantity -= 1;
+      }
+    }
+    this.setState({ cart: [...cart] });
+  }
+
+  removeProductFromCart(product) {
+    const { cart } = this.state;
+    const newCart = cart.filter((cartProduct) => cartProduct.id !== product.id);
+    this.setState({ cart: newCart });
   }
 
   addProductToCart(product) {
     const { cart } = this.state;
     const foundProduct = cart.find((cartProduct) => cartProduct.id === product.id);
     if (foundProduct) {
-      foundProduct.cartQuantity += 1;
+      if (foundProduct.cartQuantity < foundProduct.available_quantity) {
+        foundProduct.cartQuantity += 1;
+      }
       this.setState({ cart: [...cart] });
     } else {
       const newProduct = { ...product, cartQuantity: 1 };
@@ -34,12 +59,25 @@ class App extends React.Component {
             path="/"
             render={(props) => (
               <ProductList {...props} cart={this.state.cart} addToCart={this.addProductToCart} />
-              )}
+            )}
           />
-          <Route path="/product/:id" component={ProductDetails} />
+          <Route
+            path="/product/:id"
+            render={(props) => (<ProductDetails
+              {...props}
+              cart={this.state.cart}
+              addToCart={this.addProductToCart}
+              increaseOrDecreaseProductQuantity={this.increaseOrDecreaseProductQuantity} />
+            )} />
           <Route
             path="/cart"
-            render={(props) => (<ShoppingCart {...props} cart={this.state.cart} />)}
+            render={(props) => (<ShoppingCart
+              {...props}
+              cart={this.state.cart}
+              removeProductFromCart={this.removeProductFromCart}
+              increaseOrDecreaseProductQuantity={this.increaseOrDecreaseProductQuantity}
+            />
+            )}
           />
           <Route
             path="/checkout"
