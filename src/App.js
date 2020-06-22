@@ -6,6 +6,10 @@ import ProductDetails from './pages/ProductDetails';
 import ProductList from './pages/ProductList';
 import ShoppingCart from './pages/ShoppingCart';
 
+function generateRoute(path, render, exact = false) {
+  return <Route exact={exact} path={path} render={render} />;
+}
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -46,29 +50,27 @@ class App extends React.Component {
     }
   }
 
-  generateRoute(path, render, exact = false) {
-    return <Route exact={exact} path={path} render={render} />;
-  }
-
   render() {
     return (
       <BrowserRouter>
         <Switch>
-          {this.generateRoute('/', (props) => (
+          {generateRoute('/', (props) => (
             <ProductList {...props} cart={this.state.cart} addToCart={this.addProductToCart} />
           ), true)}
-          {this.generateRoute('/product/:id', (props) => (<ProductDetails {...props}
+          {generateRoute('/product/:id', (props) => (<ProductDetails
+            {...props}
             cart={this.state.cart}
             addToCart={this.addProductToCart}
             increaseOrDecreaseProductQuantity={this.increaseOrDecreaseProductQuantity}
           />))}
-          {this.generateRoute('/cart', (props) => (<ShoppingCart {...props}
+          {generateRoute('/cart', (props) => (<ShoppingCart
+            {...props}
             cart={this.state.cart}
             removeProductFromCart={this.removeProductFromCart}
             increaseOrDecreaseProductQuantity={this.increaseOrDecreaseProductQuantity}
           />))}
-          {this.generateRoute('/checkout', (props) => 
-            (<Checkout {...props} cart={this.state.cart} />)
+          {generateRoute('/checkout', (props) =>
+            (<Checkout {...props} cart={this.state.cart} />),
           )}
         </Switch>
       </BrowserRouter>
