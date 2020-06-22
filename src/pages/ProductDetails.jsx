@@ -22,16 +22,15 @@ const CartIcon = (props) => {
   );
 };
 
-const Buttons = () => {
-  return (
-    <div>
-      <button type="button" className="btn btn-light">-</button>
-      <span>1</span>
-      <button type="button" className="btn btn-light">+</button>
-      <button type="button" className="btn btn-primary">Adicionar ao carrinho</button>
-    </div>
-  );
-};
+const Buttons = () => (
+  <div>
+    <button type="button" className="btn btn-light">-</button>
+    <span>1</span>
+    <button type="button" className="btn btn-light">+</button>
+    <button type="button" className="btn btn-primary">Adicionar ao carrinho</button>
+  </div>
+);
+
 
 class ProductDetails extends React.Component {
   render() {
