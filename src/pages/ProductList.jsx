@@ -130,7 +130,7 @@ class ProductList extends React.Component {
   render() {
     const { selectedCategory, products } = this.state;
     const { addToCart, cart } = this.props;
-    const totalCart = cart.reduce((acc, product) => (product.cartQuantity * 1) + acc, 0);
+    const totalCart = cart.reduce((acc, product) => product.cartQuantity + acc, 0);
 
     return (
       <div className="container-fluid mt-3">
