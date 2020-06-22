@@ -1,9 +1,11 @@
 import React from 'react';
+import { FaShoppingCart } from 'react-icons/fa';
 import Avaliacoes from '../components/Avaliacoes';
 
 class ProductDetails extends React.Component {
   render() {
-    const { location: { state } } = this.props;
+    const { location: { state }, cart } = this.props;
+    const totalCart = cart.reduce((acc, product) => (product.cartQuantity * 1) + acc, 0);
     return (
       <div>
         <div className="card mb-3" style={{ maxWidth: '700px' }}>
@@ -19,6 +21,10 @@ class ProductDetails extends React.Component {
                 <span>1</span>
                 <button type="button" className="btn btn-light">+</button>
                 <button type="button" className="btn btn-primary">Adicionar ao carrinho</button>
+                <FaShoppingCart className="mr-1" size={32} />
+                <p className="mb-0">
+                  <span data-testid="shopping-cart-size">{totalCart}</span> {totalCart === 1 ? 'item' : 'itens'}
+                </p>
                 <ul className="list-group">
                   {state.attributes
                     .map((att) => <li key={att.name} className="list-group-item">{`${att.name}: ${att.value_name}`}</li>)}
