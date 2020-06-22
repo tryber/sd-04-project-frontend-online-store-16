@@ -66,12 +66,12 @@ const List = (props) => {
 };
 
 const HeaderMenu = (props) => {
-  const { totalCart, searchApi, products, filterProducts } = props;
+  const { totalCart, products, filterProducts } = props;
   return (
     <div>
       <div className="row align-items-center">
         <div className="col pr-0">
-          <SearchBar searchApi={searchApi} />
+          <SearchBar />
         </div>
         <div className="col-2 pl-0">
           <Link
