@@ -1,6 +1,6 @@
 import React from 'react';
+import { FaTruck, FaShoppingCart } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import { FaShoppingCart } from 'react-icons/fa';
 import Avaliacoes from '../components/Avaliacoes';
 
 const CartIcon = (props) => {
@@ -49,6 +49,10 @@ class ProductDetails extends React.Component {
                 <h5 data-testid="product-detail-name" className="card-title">{state.title}</h5>
                 <p className="card-text">{` ${state.price} R$`}</p>
                 <Buttons />
+                {state.shipping.free_shipping && (
+                  <span data-testid="free-shipping" className="bg-success p-2 br-5 ml-1">
+                    <FaTruck className="mr-1" /> Frete gratis
+                  </span>)}
                 <ul className="list-group">
                   {state.attributes
                     .map((att) => <li key={att.name} className="list-group-item">{`${att.name}: ${att.value_name}`}</li>)}
