@@ -1,32 +1,58 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { FaShoppingCart, FaUserEdit, FaCreditCard } from 'react-icons/fa';
+
+const ReviewCart = (props) => {
+  const { cart, totalPrice } = props;
+  return (
+    <ul className="list-group">
+      {cart.map((product) => (
+        <li
+          key={product.id}
+          className="list-group-item d-flex justify-content-between lh-condensed"
+        >
+          <div>
+            <p className="my-0">{product.title}</p>
+            <small className="text-muted">
+              {product.cartQuantity} {product.cartQuantity === 1 ? 'unidade' : 'unidades'}
+            </small>
+          </div>
+          <span className="text-muted ml-2">
+            R${(product.cartQuantity * product.price).toFixed(2)}
+          </span>
+        </li>
+      ))}
+      <li className="list-group-item d-flex justify-content-between lh-condensed">
+        <span>Total: </span><strong>R${totalPrice.toFixed(2)}</strong>
+      </li>
+    </ul>
+  );
+};
 
 const CartReview = (props) => {
   const { cart } = props;
-  const total = cart.reduce((acc, product) => (product.cartQuantity * product.price) + acc, 0);
+  const totalPrice = cart.reduce((acc, product) => (product.cartQuantity * product.price) + acc, 0);
+  const totalQuantity = cart.reduce((acc, product) => (product.cartQuantity * 1) + acc, 0);
   return (
     <section className="my-3">
-      <h5>Revise seus produtos</h5>
-      <div className="list-group">
-        {cart.map((product) => (
-          <button
-            key={product.id}
-            type="button"
-            className="list-group-item list-group-item-action"
-          >
-            {product.cartQuantity} x {product.title}
-          </button>
-        ))}
-      </div>
-      <div className="row justify-content-end m-0 mt-2">
-        <h5>Total: R$ {total}</h5>
-      </div>
+      <h4 className="d-flex justify-content-between align-items-center mb-3">
+        <span className="text-muted d-flex align-items-center">
+          <FaShoppingCart className="mr-1" /> Seu carrinho
+        </span>
+        <span className="badge badge-secondary badge-pill">
+          {totalQuantity}
+        </span>
+      </h4>
+      <ReviewCart cart={cart} totalPrice={totalPrice} />
     </section>
   );
 };
 
 const BuyerInfo = ({ changeFormState, formState }) => (
-  <section className="mb-5">
-    <h5>Informacoes do comprador</h5>
+  <section className="mt-3 mb-4">
+    <h4 className="mb-3 d-flex align-items-center">
+      <FaUserEdit className="mr-1" /> Informacoes do comprador
+    </h4>
     <form>
       <div className="row mb-3">
         <div className="col">
@@ -40,6 +66,8 @@ const BuyerInfo = ({ changeFormState, formState }) => (
             value={formState.fullName}
           />
         </div>
+      </div>
+      <div className="row mb-3">
         <div className="col">
           <input
             type="text"
@@ -51,6 +79,8 @@ const BuyerInfo = ({ changeFormState, formState }) => (
             value={formState.cpf}
           />
         </div>
+      </div>
+      <div className="row mb-3">
         <div className="col">
           <input
             type="text"
@@ -62,6 +92,8 @@ const BuyerInfo = ({ changeFormState, formState }) => (
             value={formState.email}
           />
         </div>
+      </div>
+      <div className="row mb-3">
         <div className="col">
           <input
             type="text"
@@ -104,10 +136,13 @@ const BuyerInfo = ({ changeFormState, formState }) => (
 
 
 const PaymentInfo = ({ changeFormState, formState }) => (
-  <section>
-    <h5>Metodo de pagamento</h5>
+  <section className="mb-4">
+    <hr className="mb-4" />
+    <h4 className="mb-3 d-flex align-items-center">
+      <FaCreditCard className="mr-1" /> Metodo de pagamento
+    </h4>
     <form value={formState.paymentMethod}>
-      <div className="form-check form-check-inline">
+      <div className="form-check">
         <input
           name="paymentMethod"
           className="form-check-input"
@@ -118,7 +153,7 @@ const PaymentInfo = ({ changeFormState, formState }) => (
         />
         <label className="form-check-label" htmlFor="a">Boleto</label>
       </div>
-      <div className="form-check form-check-inline">
+      <div className="form-check">
         <input
           name="paymentMethod"
           className="form-check-input"
@@ -129,7 +164,7 @@ const PaymentInfo = ({ changeFormState, formState }) => (
         />
         <label className="form-check-label" htmlFor="b">Visa</label>
       </div>
-      <div className="form-check form-check-inline">
+      <div className="form-check">
         <input
           name="paymentMethod"
           className="form-check-input"
@@ -140,7 +175,7 @@ const PaymentInfo = ({ changeFormState, formState }) => (
         />
         <label className="form-check-label" htmlFor="c">MasterCard</label>
       </div>
-      <div className="form-check form-check-inline">
+      <div className="form-check">
         <input
           name="paymentMethod"
           className="form-check-input"
@@ -181,14 +216,21 @@ class Checkout extends React.Component {
     const { cart } = this.props;
     return (
       <div className="container">
-        <CartReview cart={cart} />
-        <BuyerInfo
-          changeFormState={this.changeFormState}
-          formState={this.state}
-        />
-        <PaymentInfo changeFormState={this.changeFormState} formState={this.state} />
-        <div className="row justify-content-center">
-          <button className="btn btn-primary btn-lg">Comprar</button>
+        <div className="row justify-content-start mt-3">
+          <Link to="/cart">Voltar</Link>
+        </div>
+        <div className="row">
+          <div className="col-8">
+            <BuyerInfo
+              changeFormState={this.changeFormState}
+              formState={this.state}
+            />
+            <PaymentInfo changeFormState={this.changeFormState} formState={this.state} />
+            <button className="btn btn-primary btn-block btn-lg mb-3">Comprar</button>
+          </div>
+          <div className="col-4">
+            <CartReview cart={cart} />
+          </div>
         </div>
       </div>
     );

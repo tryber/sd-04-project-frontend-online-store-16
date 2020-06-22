@@ -1,48 +1,58 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FaShoppingCart } from 'react-icons/fa';
 
 import * as api from '../services/api';
 import SearchBar from '../components/SearchBar';
 import CategoriesList from '../components/CategoriesList';
+import FilterList from '../components/FilterList';
+
+import './ProductList.css';
 
 const ProductCard = (props) => {
   const { id, thumbnail, title, price } = props.product;
+  const isInCart = props.cart.some((cartProduct) => cartProduct.id === id);
   return (
-    <div data-testid="product" className="card w-25">
-      <Link data-testid="product-detail-link" to={{ pathname: `/product/${id}`, state: props.product }}>
-        <img className="card-img-top" height={150} src={thumbnail} alt="" />
-        <div className="card-header">
-          <p className="card-title">{title}</p>
-        </div>
-      </Link>
-      <div className="card-body row justify-content-center">
-        <p className="card-text text-center">R$ {Number(price).toFixed(2)}</p>
-        <button
-          data-testid="product-add-to-cart"
-          className="btn btn-primary"
-          onClick={() => props.addToCart(props.product)}
+    <div className="col-4 mb-4">
+      <div data-testid="product" className={`card ${isInCart ? 'bg-success text-white' : ''}`}>
+        <Link
+          className={`${isInCart ? 'text-white' : ''}`}
+          data-testid="product-detail-link"
+          to={{ pathname: `/product/${id}`, state: props.product }}
         >
-          Adicionar ao carrinho
-        </button>
+          <img className="card-img-top img-responsive" height={150} src={thumbnail} alt="" />
+          <div className="card-header text-center min-height">
+            {title}
+          </div>
+        </Link>
+        <div className="card-body d-flex flex-column justify-content-center">
+          <p className="card-text text-center">R$ {Number(price).toFixed(2)}</p>
+          <button
+            data-testid="product-add-to-cart"
+            className="btn btn-primary"
+            onClick={() => props.addToCart(props.product)}
+          >
+            Adicionar ao carrinho
+          </button>
+        </div>
       </div>
-
     </div>
-
   );
 };
 
 const List = (props) => {
-  const { products, addToCart } = props;
+  const { products, addToCart, cart } = props;
   return (
     <div>
       {products[0] === 'initial' && (
         <h4 data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
-        </h4>)}
+        </h4>
+      )}
       {products[0] !== 'initial' && (
         <div className="row align-items-center">
           {products.map((product) => (
-            <ProductCard key={product.id} product={product} addToCart={addToCart} />
+            <ProductCard key={product.id} product={product} cart={cart} addToCart={addToCart} />
           ))}
         </div>
       )}
@@ -51,6 +61,34 @@ const List = (props) => {
           Nenhum produto foi encontrado
         </h4>
       )}
+    </div>
+  );
+};
+
+const HeaderMenu = (props) => {
+  const { totalCart, products, filterProducts } = props;
+  return (
+    <div>
+      <div className="row align-items-center">
+        <div className="col pr-0">
+          <SearchBar />
+        </div>
+        <div className="col-2 pl-0">
+          <Link
+            className="d-flex align-items-center"
+            data-testid="shopping-cart-button"
+            to="/cart"
+          >
+            <FaShoppingCart className="mr-1" size={32} />
+            <p className="mb-0">
+              <span data-testid="shopping-cart-size">{totalCart}</span> {totalCart === 1 ? 'item' : 'itens'}
+            </p>
+          </Link>
+        </div>
+      </div>
+      <div className="row">
+        <FilterList products={products} filterProducts={filterProducts} />
+      </div>
     </div>
   );
 };
@@ -65,12 +103,17 @@ class ProductList extends React.Component {
     this.resetSelectedCategory = this.resetSelectedCategory.bind(this);
     this.onSelectedCategoryChange = this.onSelectedCategoryChange.bind(this);
     this.searchApi = this.searchApi.bind(this);
+    this.filterProducts = this.filterProducts.bind(this);
   }
 
   onSelectedCategoryChange(category) {
     this.setState((state) => ({ ...state, selectedCategory: category }));
     api.getProductsFromCategoryAndQuery(category.id, '')
       .then((data) => this.setState((state) => ({ ...state, products: data.results })));
+  }
+
+  filterProducts(products) {
+    this.setState((state) => ({ ...state, products }));
   }
 
   resetSelectedCategory() {
@@ -85,9 +128,11 @@ class ProductList extends React.Component {
 
   render() {
     const { selectedCategory, products } = this.state;
-    const { addToCart } = this.props;
+    const { addToCart, cart } = this.props;
+    const totalCart = cart.reduce((acc, product) => (product.cartQuantity * 1) + acc, 0);
+
     return (
-      <div className="container-fluid">
+      <div className="container-fluid mt-3">
         <div className="row">
           <div className="col-3">
             <CategoriesList
@@ -97,17 +142,17 @@ class ProductList extends React.Component {
             />
           </div>
           <div className="col-9">
-            <div className="row align-items-center">
-              <div className="col-10">
-                <SearchBar
-                  searchApi={this.searchApi}
-                />
-              </div>
-              <div className="col-2">
-                <Link data-testid="shopping-cart-button" to="/cart">Carrinho</Link>
+            <HeaderMenu
+              products={products}
+              totalCart={totalCart}
+              searchApi={this.searchApi}
+              filterProducts={this.filterProducts}
+            />
+            <div className="row">
+              <div className="col-12">
+                <List products={products} cart={cart} addToCart={addToCart} />
               </div>
             </div>
-            <List products={products} addToCart={addToCart} />
           </div>
         </div>
       </div>

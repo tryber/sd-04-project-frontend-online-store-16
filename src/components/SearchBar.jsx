@@ -21,7 +21,6 @@ class SearchBar extends React.Component {
 
   render() {
     const { searchInput } = this.state;
-    const { searchApi } = this.props;
     return (
       <form
         onSubmit={this.onSubmitHandler}
@@ -37,10 +36,9 @@ class SearchBar extends React.Component {
           data-testid="query-input"
         />
         <button
-          type="button"
-          className="btn btn-primary mx-1"
+          type="submit"
+          className="btn btn-primary ml-3"
           data-testid="query-button"
-          onClick={() => searchApi(searchInput)}
         >
           Pesquisar
         </button>
