@@ -38,6 +38,7 @@ class App extends React.Component {
   increaseOrDecreaseProductQuantity(product, increase = true) {
     const { cart } = this.state;
     const foundProduct = cart.find((cartProduct) => cartProduct.id === product.id);
+    if (!foundProduct) return null;
     if (increase && foundProduct.cartQuantity < foundProduct.available_quantity) {
       foundProduct.cartQuantity += 1;
     } else if (!increase && foundProduct.cartQuantity > 1) {
