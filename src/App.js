@@ -19,6 +19,22 @@ class App extends React.Component {
     this.removeProductFromCart = this.removeProductFromCart.bind(this);
   }
 
+  componentDidMount() {
+    this.getCartFromStorage();
+  }
+
+  componentDidUpdate() {
+    const { cart } = this.state;
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }
+
+  getCartFromStorage() {
+    const cart = JSON.parse(localStorage.getItem('cart'));
+    if (cart) {
+      this.setState({ cart });
+    }
+  }
+
   increaseOrDecreaseProductQuantity(product, increase = true) {
     const { cart } = this.state;
     const foundProduct = cart.find((cartProduct) => cartProduct.id === product.id);
