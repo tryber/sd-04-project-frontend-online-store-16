@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaTruck, FaShoppingCart } from 'react-icons/fa';
+import { FaTruck, FaShoppingCart, FaMinus, FaPlus } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import Avaliacoes from '../components/Avaliacoes';
 
@@ -22,19 +22,41 @@ const CartIcon = (props) => {
   );
 };
 
-const Buttons = () => (
-  <div>
-    <button type="button" className="btn btn-light">-</button>
-    <span>1</span>
-    <button type="button" className="btn btn-light">+</button>
-    <button type="button" className="btn btn-primary">Adicionar ao carrinho</button>
-  </div>
-);
+const Buttons = (props) => {
+  const { increaseOrDecrease, addToCart, product, cart } = props;
+  const foundProduct = cart.find(cartProduct => cartProduct.id === product.id);
+  return (
+    <div>
+      <button
+        type="button"
+        className="btn mx-2 my-0 p-0 bg-transparent"
+        onClick={() => increaseOrDecrease(product, false)}
+      >
+        <FaMinus size={12} />
+      </button>
+      <span>{foundProduct ? foundProduct.cartQuantity : 0}</span>
+      <button
+        type="button"
+        className="btn mx-2 my-0 p-0 bg-transparent"
+        onClick={() => increaseOrDecrease(product)}
+      >
+        <FaPlus size={12} />
+      </button>
+      <button
+        type="button"
+        className="btn btn-primary mb-2"
+        onClick={() => addToCart(product)}
+      >
+        Adicionar ao carrinho
+      </button>
+    </div>
+  )
+};
 
 
 class ProductDetails extends React.Component {
   render() {
-    const { location: { state }, cart } = this.props;
+    const { location: { state }, cart, increaseOrDecreaseProductQuantity, addToCart } = this.props;
     const totalCart = cart.reduce((acc, product) => product.cartQuantity + acc, 0);
     return (
       <div>
@@ -48,7 +70,12 @@ class ProductDetails extends React.Component {
               <div className="card-body">
                 <h5 data-testid="product-detail-name" className="card-title">{state.title}</h5>
                 <p className="card-text">{` ${state.price} R$`}</p>
-                <Buttons />
+                <Buttons
+                  increaseOrDecrease={increaseOrDecreaseProductQuantity}
+                  addToCart={addToCart}
+                  product={state}
+                  cart={cart}
+                />
                 {state.shipping.free_shipping && (
                   <span data-testid="free-shipping" className="bg-success p-2 br-5 ml-1">
                     <FaTruck className="mr-1" /> Frete gratis
