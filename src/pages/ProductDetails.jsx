@@ -24,7 +24,7 @@ const CartIcon = (props) => {
 
 const Buttons = (props) => {
   const { increaseOrDecrease, addToCart, product, cart } = props;
-  const foundProduct = cart.find(cartProduct => cartProduct.id === product.id);
+  const foundProduct = cart.find((cartProduct) => cartProduct.id === product.id);
   return (
     <div>
       <button
@@ -50,9 +50,32 @@ const Buttons = (props) => {
         Adicionar ao carrinho
       </button>
     </div>
-  )
+  );
 };
 
+const CardBody = (props) => {
+  const { increaseOrDecrease, addToCart, product, cart } = props;
+  return (
+    <div className="card-body">
+      <h5 data-testid="product-detail-name" className="card-title">{product.title}</h5>
+      <p className="card-text">{` ${product.price} R$`}</p>
+      <Buttons
+        increaseOrDecrease={increaseOrDecrease}
+        addToCart={addToCart}
+        product={product}
+        cart={cart}
+      />
+      {product.shipping.free_shipping && (
+        <span data-testid="free-shipping" className="bg-success p-2 br-5 ml-1">
+          <FaTruck className="mr-1" /> Frete gratis
+        </span>)}
+      <ul className="list-group">
+        {product.attributes
+          .map((att) => <li key={att.name} className="list-group-item">{`${att.name}: ${att.value_name}`}</li>)}
+      </ul>
+    </div>
+  );
+};
 
 class ProductDetails extends React.Component {
   render() {
@@ -67,24 +90,12 @@ class ProductDetails extends React.Component {
               <img src={state.thumbnail} className="card-img" alt="..." />
             </div>
             <div className="col-md-8">
-              <div className="card-body">
-                <h5 data-testid="product-detail-name" className="card-title">{state.title}</h5>
-                <p className="card-text">{` ${state.price} R$`}</p>
-                <Buttons
-                  increaseOrDecrease={increaseOrDecreaseProductQuantity}
-                  addToCart={addToCart}
-                  product={state}
-                  cart={cart}
-                />
-                {state.shipping.free_shipping && (
-                  <span data-testid="free-shipping" className="bg-success p-2 br-5 ml-1">
-                    <FaTruck className="mr-1" /> Frete gratis
-                  </span>)}
-                <ul className="list-group">
-                  {state.attributes
-                    .map((att) => <li key={att.name} className="list-group-item">{`${att.name}: ${att.value_name}`}</li>)}
-                </ul>
-              </div>
+              <CardBody
+                increaseOrDecrease={increaseOrDecreaseProductQuantity}
+                addToCart={addToCart}
+                product={state}
+                cart={cart}
+              />
             </div>
           </div>
         </div>
