@@ -45,6 +45,7 @@ const Buttons = (props) => {
       <button
         type="button"
         className="btn btn-primary mb-2"
+        data-testid="product-detail-add-to-cart"
         onClick={() => addToCart(product)}
       >
         Adicionar ao carrinho
