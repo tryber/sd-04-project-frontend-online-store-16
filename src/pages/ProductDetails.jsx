@@ -57,23 +57,28 @@ const Buttons = (props) => {
 const CardBody = (props) => {
   const { increaseOrDecrease, addToCart, product, cart } = props;
   return (
-    <div className="card-body">
-      <h5 data-testid="product-detail-name" className="card-title">{product.title}</h5>
-      <p className="card-text">{` ${product.price} R$`}</p>
-      <Buttons
-        increaseOrDecrease={increaseOrDecrease}
-        addToCart={addToCart}
-        product={product}
-        cart={cart}
-      />
-      {product.shipping.free_shipping && (
-        <span data-testid="free-shipping" className="bg-success p-2 br-5 ml-1">
-          <FaTruck className="mr-1" /> Frete gratis
-        </span>)}
-      <ul className="list-group">
-        {product.attributes
-          .map((att) => <li key={att.name} className="list-group-item">{`${att.name}: ${att.value_name}`}</li>)}
-      </ul>
+    <div className="col">
+      <div className="card-body">
+        <h5 data-testid="product-detail-name" className="card-title">{product.title}</h5>
+        <p className="card-text">{` ${product.price} R$`}</p>
+        <Buttons
+          increaseOrDecrease={increaseOrDecrease}
+          addToCart={addToCart}
+          product={product}
+          cart={cart}
+        />
+        {product.shipping.free_shipping && (
+          <div className="my-3">
+            <span data-testid="free-shipping" className="bg-success p-2 br-5 ml-1 my-4">
+              <FaTruck className="mr-1" /> Frete gratis
+            </span>
+          </div>
+        )}
+        <ul className="list-group">
+          {product.attributes
+            .map((att) => <li key={att.name} className="list-group-item">{`${att.name}: ${att.value_name}`}</li>)}
+        </ul>
+      </div>
     </div>
   );
 };
@@ -90,14 +95,12 @@ class ProductDetails extends React.Component {
             <div className="col-md-4">
               <img src={state.thumbnail} className="card-img" alt="..." />
             </div>
-            <div className="col-md-8">
-              <CardBody
-                increaseOrDecrease={increaseOrDecreaseProductQuantity}
-                addToCart={addToCart}
-                product={state}
-                cart={cart}
-              />
-            </div>
+            <CardBody
+              increaseOrDecrease={increaseOrDecreaseProductQuantity}
+              addToCart={addToCart}
+              product={state}
+              cart={cart}
+            />
           </div>
         </div>
         <Avaliacoes id={state.id} />
